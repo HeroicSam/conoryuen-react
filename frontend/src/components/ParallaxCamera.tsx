@@ -22,7 +22,7 @@ export default function ParallaxCamera() {
   }, [])
 
   useFrame(() => {
-    camera.position.lerp(vec.set(cursorPos.x * 0.0005, cursorPos.y * 0.0005, 0.5), 0.05)
+    camera.position.lerp(vec.set(cursorPos.x * 0.0005, 0, 0.5), 0.05) // y- cursorPos.y * 0.0005
   })
   return <PerspectiveCamera />
 }
