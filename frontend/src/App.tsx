@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 import { Canvas, } from '@react-three/fiber';
 import Leaf from './components/Leaf';
 import ParallaxCamera from './components/ParallaxCamera';
@@ -12,7 +12,7 @@ function App({ count = 80, depth = 80 }) {
         <h1>hello</h1>
       </div>
       <Canvas gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
-        <color attach="background" args={["#ffbf40"]} />
+        <color attach="background" args={["#ffffff"]} /> 
         <spotLight position={[10, 10, 10]} intensity={1} />
         <Suspense fallback={null}>
           <Environment preset='apartment' />
@@ -26,5 +26,7 @@ function App({ count = 80, depth = 80 }) {
     </>
   )
 }
+
+// ffbf40
 
 export default App
