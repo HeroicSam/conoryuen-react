@@ -9,7 +9,13 @@ function App({ count = 80, depth = 80 }) {
   return (
     <>
       <div className="overlay">
-        <h1>hello</h1>
+        <div className="lefside">
+          <h1>Conor Yuen</h1>
+          <p>Work</p>
+          <h1>Hotswaps</h1>
+          <h1>EcoHabit</h1>
+
+        </div>
       </div>
       <Canvas gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
         <color attach="background" args={["#ffffff"]} /> 
@@ -28,5 +34,9 @@ function App({ count = 80, depth = 80 }) {
 }
 
 // ffbf40
+// Changing backgrounds whnen hovering over menu items, e.g falling keyboards, plastic bottles lol, etc.
+// Hover effect for menu items -> left to right font color transition, or bold -> semibold effect.
+// Scroll down automatically selects different links
+// Info block maybe can scroll as well, or transition in and out
 
 export default App

@@ -9,11 +9,13 @@ body,
 }
 
 .overlay {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  color: white;
+  color: black;
   z-index: 9999;
 }
