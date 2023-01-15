@@ -7,7 +7,7 @@ export default function Leaf({ z }) {
   const ref = useRef();
   const { viewport, camera } = useThree();
   const { width, height } = viewport.getCurrentViewport(camera, [0, 0, z]);
-  const { nodes, materials } = useGLTF('/leaf-transformed.glb')
+  const { nodes, materials } = useGLTF('/leaf-transformed.glb');
 
   const [data] = useState({
     x: THREE.MathUtils.randFloatSpread(2),
