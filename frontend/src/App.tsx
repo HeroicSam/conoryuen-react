@@ -1,30 +1,29 @@
-import { Environment, Html, useProgress } from '@react-three/drei';
+import { Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
 import { Perf } from 'r3f-perf'
+import Loader from './components/Loader';
 import Leaf from './components/Leaf';
 import ParallaxCamera from './components/ParallaxCamera';
-import { Suspense } from 'react';
-
-function Loader() {
-  const { active, progress, errors, item, loaded, total } = useProgress()
-  console.log(progress);  
-  return <Html center>{progress} % loaded</Html>
-}
+import { useState, Suspense } from 'react';
 
 function App({ count = 80, depth = 80 }) {
+  const [modelsLoaded, setModelsLoaded] = useState(false);
+  console.log(modelsLoaded);
   return (
     <>
-      {/* <div className="overlay">
-        <div className="lefside">
-          <h1>Conor Yuen</h1>
-          <p>Work</p>
-          <h1>Hotswaps</h1>
-          <h1>EcoHabit</h1>
+      {modelsLoaded && (
+        <div className="overlay">
+          <div className="lefside">
+            <h1 className="text-lg">Conor Yuen</h1>
+            <p>Work</p>
+            <h1>Hotswaps</h1>
+            <h1>EcoHabit</h1>
+          </div>
         </div>
-      </div> */}
+      )}
       <Canvas gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
-        <Suspense fallback={<Loader/>}>
+        <Suspense fallback={<Loader setModelsLoaded={setModelsLoaded}/>}>
           <Perf />
           <color attach="background" args={["#ffffff"]} /> 
           <spotLight position={[10, 10, 10]} intensity={1} />
@@ -46,4 +45,4 @@ function App({ count = 80, depth = 80 }) {
 // Scroll down automatically selects different links
 // Info block maybe can scroll as well, or transition in and out
 
-export default App
+export default App;
