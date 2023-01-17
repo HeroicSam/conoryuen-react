@@ -18,8 +18,8 @@ export default function Leaf({ z }) {
   });
 
   useFrame((state) => {
-    ref.current.rotation.set((data.rX += 0.0001), (data.rY += 0.0004), (data.rZ += 0.0005));
-    ref.current.position.set(data.x * width, (data.y -= 0.005), z);
+    ref.current.rotation.set((data.rX += 0.0004), (data.rY += 0.0004), (data.rZ += 0.0005));
+    ref.current.position.set(data.x * width, (data.y -= 0.004), z);
     if (data.y < -height / 1.5) {
       data.y = height / 1.5
     };

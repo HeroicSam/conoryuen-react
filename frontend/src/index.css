@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family:"Stilson";
+  src:url("https://use.typekit.net/af/9affc5/0000000000000000774a672c/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/9affc5/0000000000000000774a672c/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/9affc5/0000000000000000774a672c/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+  font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
 html,
 body,
 #root {
@@ -10,20 +16,19 @@ body,
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: 'Playfair Display';
-  font-style: italic;
+  font-family: 'Stilson';
 }
 
 .singleLine {
   width: 100%;
-  height: 10vh;
+  height: 25vh;
   position: relative;
   overflow: hidden;
 }
 
 .singleText {
   position: absolute;
-  font-size: 8vw;
+  font-size: 16vw;
   color: black;
-  line-height: 8vw;
+  line-height: 16vw;
 }

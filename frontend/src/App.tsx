@@ -6,6 +6,7 @@ import gsap, { Power4 } from 'gsap';
 import Loader from './components/Loader';
 import Leaf from './components/Leaf';
 import ParallaxCamera from './components/ParallaxCamera';
+import NavBar from './components/NavBar';
 import { useState, Suspense, useEffect } from 'react';
 
 function App({ count = 80, depth = 80 }) {
@@ -13,8 +14,8 @@ function App({ count = 80, depth = 80 }) {
 
   useEffect(() => {
     const t1 = gsap.timeline();
-    t1.from(".singleText", {
-      y: 200,
+    t1.from(".singleText, .ease", {
+      y: 400,
       ease: Power4.easeOut,
       delay: 1,
       duration: 1.8,
@@ -27,24 +28,28 @@ function App({ count = 80, depth = 80 }) {
   return (
     <>
       {modelsLoaded && (
-        <div className="flex flex-col absolute inset-0 z-50 text-black justify-center p-10">
-          <div className="w-full h-full flex flex-col justify-center items-center">
+        <div className="flex flex absolute inset-0 z-50 text-black justify-center">
+          <NavBar />
+          <div className="w-full h-full flex flex-col justify-start items-center px-24 py-20">
             <div className="singleLine">
-              <h1 className="singleText serif">Conor Yuen</h1>
+              <h1 className="singleText serif">Conor</h1>
             </div>
             <div className="singleLine">
+              <h1 className="singleText serif">Yuen</h1>
+            </div>
+            {/* <div className="singleLine">
               <h1 className="singleText">Hotswaps</h1>
             </div>
             <div className="singleLine">
               <h1 className="singleText">EcoHabit</h1>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
       <Canvas gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
         <Suspense fallback={<Loader setModelsLoaded={setModelsLoaded}/>}>
-          <Perf />
-          <color attach="background" args={["#ffbf40"]} /> 
+          {/* <Perf /> */}
+          <color attach="background" args={["#FFBF52"]} /> 
           <spotLight position={[10, 10, 10]} intensity={1} />
           <Environment preset='apartment' />
           {Array.from({ length: count }, (_, i) => (<Leaf key={i} z={-(i / count) * depth - 20} />))}

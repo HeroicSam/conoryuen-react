@@ -7,7 +7,11 @@ function Loader( { setModelsLoaded } ) {
     setModelsLoaded(!active);
   };
   return (
-    <Html center>{progress} % loaded</Html>
+    <Html fullscreen>
+      <div className="w-full h-full bg-black flex justify-center items-center">
+        <h1 className="text-white">{progress}</h1>
+      </div>
+    </Html>
   )
 }
 
