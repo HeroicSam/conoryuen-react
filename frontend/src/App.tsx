@@ -31,12 +31,12 @@ function App({ count = 80, depth = 80 }) {
         <div className="flex flex absolute inset-0 z-50 text-black justify-center">
           <NavBar />
           <div className="w-full h-full flex flex-col justify-start items-center px-24 py-20">
-            <div className="singleLine">
+            {/* <div className="singleLine">
               <h1 className="singleText serif">Conor</h1>
             </div>
             <div className="singleLine">
               <h1 className="singleText serif">Yuen</h1>
-            </div>
+            </div> */}
             {/* <div className="singleLine">
               <h1 className="singleText">Hotswaps</h1>
             </div>
