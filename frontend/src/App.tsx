@@ -2,30 +2,49 @@ import { Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
 import { Perf } from 'r3f-perf'
+import gsap, { Power4 } from 'gsap';
 import Loader from './components/Loader';
 import Leaf from './components/Leaf';
 import ParallaxCamera from './components/ParallaxCamera';
-import { useState, Suspense } from 'react';
+import { useState, Suspense, useEffect } from 'react';
 
 function App({ count = 80, depth = 80 }) {
   const [modelsLoaded, setModelsLoaded] = useState(false);
-  console.log(modelsLoaded);
+
+  useEffect(() => {
+    const t1 = gsap.timeline();
+    t1.from(".singleText", {
+      y: 200,
+      ease: Power4.easeOut,
+      delay: 1,
+      duration: 1.8,
+      stagger: {
+        amount: 0.4,
+      },
+    });
+  });
+
   return (
     <>
       {modelsLoaded && (
-        <div className="overlay">
-          <div className="lefside">
-            <h1 className="text-lg">Conor Yuen</h1>
-            <p>Work</p>
-            <h1>Hotswaps</h1>
-            <h1>EcoHabit</h1>
+        <div className="flex flex-col absolute inset-0 z-50 text-black justify-center p-10">
+          <div className="w-full h-full flex flex-col justify-center items-center">
+            <div className="singleLine">
+              <h1 className="singleText serif">Conor Yuen</h1>
+            </div>
+            <div className="singleLine">
+              <h1 className="singleText">Hotswaps</h1>
+            </div>
+            <div className="singleLine">
+              <h1 className="singleText">EcoHabit</h1>
+            </div>
           </div>
         </div>
       )}
       <Canvas gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
         <Suspense fallback={<Loader setModelsLoaded={setModelsLoaded}/>}>
           <Perf />
-          <color attach="background" args={["#ffffff"]} /> 
+          <color attach="background" args={["#ffbf40"]} /> 
           <spotLight position={[10, 10, 10]} intensity={1} />
           <Environment preset='apartment' />
           {Array.from({ length: count }, (_, i) => (<Leaf key={i} z={-(i / count) * depth - 20} />))}
