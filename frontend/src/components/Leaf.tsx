@@ -3,8 +3,8 @@ import { useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useGLTF } from '@react-three/drei';
 
-export default function Leaf({ z }) {
-  const ref = useRef();
+export default function Leaf({ z } : { z: number }) {
+  const ref = useRef<HTMLDivElement>(null);
   const { viewport, camera } = useThree();
   const { width, height } = viewport.getCurrentViewport(camera, [0, 0, z]);
   const { nodes, materials } = useGLTF('/leaf-transformed.glb');
