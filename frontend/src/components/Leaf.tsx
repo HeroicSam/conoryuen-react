@@ -26,7 +26,7 @@ function Leaf({ z } : { z: number }) {
   })
 
   return (
-    <mesh ref={ref} geometry={(nodes.Object_3 as THREE.Mesh).geometry} material={materials['Material.001']} position={[1.09, -0.73, 0.52]} material-emissive="orange" scale={5} />
+    <mesh ref={ref} geometry={(nodes.Object_3 as THREE.Mesh).geometry} material={materials['Material.001']} position={[1.09, -0.73, 0.52]} material-emissive="#888888" scale={5} />
   )
 }
 
