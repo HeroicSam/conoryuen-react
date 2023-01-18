@@ -14,6 +14,7 @@ function App({ count = 80, depth = 80 }) {
 
   useEffect(() => {
     const t1 = gsap.timeline();
+    const t2 = gsap
     t1.from(".singleText, .ease", {
       y: 400,
       ease: Power4.easeOut,
@@ -43,7 +44,7 @@ function App({ count = 80, depth = 80 }) {
       )}
       <Canvas gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
         <Suspense fallback={<Loader setModelsLoaded={setModelsLoaded}/>}>
-          {/* <Perf /> */}
+          <Perf />
           <color attach="background" args={["#FFBF52"]} /> 
           <spotLight position={[10, 10, 10]} intensity={1} />
           <Environment preset='apartment' />
