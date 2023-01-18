@@ -4,7 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useGLTF } from '@react-three/drei';
 
 function Keyboard({ z } : { z: number }) {
-  const ref = useRef<THREE.Mesh>(null!);
+  const ref = useRef<THREE.Group>(null!);
   const { viewport, camera } = useThree();
   const { width, height } = viewport.getCurrentViewport(camera, [0, 0, z]);
   const { nodes, materials } = useGLTF('/keyboard-v1-transformed.glb')

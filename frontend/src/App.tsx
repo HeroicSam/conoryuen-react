@@ -5,7 +5,6 @@ import gsap, { Power4 } from 'gsap';
 import Loader from './components/Loader';
 import Leaf from './components/Leaf';
 import Keyboard from './components/Keyboard';
-import Models from './components/Models';
 import ParallaxCamera from './components/ParallaxCamera';
 import NavBar from './components/NavBar';
 import useWidthBreakpointReached from './utility/useWidthBreakpointReached';
