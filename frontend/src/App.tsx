@@ -30,14 +30,20 @@ function App({ count = 20, depth = 80 }) {
       {modelsLoaded && (
         <div className="flex flex absolute inset-0 z-50 text-black justify-center">
           <NavBar />
-          <div className="w-full h-full flex flex-col justify-end items-center px-24 py-20">
+          <div className="w-full h-full flex flex-col justify-center items-center px-24 py-20">
+            <hr className="w-full border" />
             <div className="singleLine">
-              <h1 className="singleText stilson">HOTSWAPS</h1>
+              <h1 className="singleText stilson">Hotswaps</h1>
             </div>
             <hr className="w-full border" />
             <div className="singleLine">
-              <h1 className="singleText stilson">ECOHABIT</h1>
+              <h1 className="singleText stilson ml-20 ">EcoHabit</h1>
             </div>
+            <hr className="w-full border" />
+            <div className="singleLine">
+              <h1 className="singleText stilson ml-40 ">Against All Odds</h1>
+            </div>
+            <hr className="w-full border" />
           </div>
         </div>
       )}

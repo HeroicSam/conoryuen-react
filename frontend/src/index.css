@@ -36,14 +36,14 @@ body,
 
 .singleLine {
   width: 100%;
-  height: 14vh;
+  height: 10rem;
   position: relative;
   overflow: hidden;
 }
 
 .singleText {
   position: absolute;
-  font-size: 10vw;
+  font-size: 8rem;
   color: black;
-  line-height: 10vw;
+  line-height: 8rem;
 }
