@@ -1,7 +1,7 @@
 import { Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
-import { Perf } from 'r3f-perf'
+import { Perf } from 'r3f-perf';
 import gsap, { Power4 } from 'gsap';
 import Loader from './components/Loader';
 import Leaf from './components/Leaf';
@@ -30,19 +30,14 @@ function App({ count = 80, depth = 80 }) {
       {modelsLoaded && (
         <div className="flex flex absolute inset-0 z-50 text-black justify-center">
           <NavBar />
-          <div className="w-full h-full flex flex-col justify-start items-center px-24 py-20">
-            {/* <div className="singleLine">
-              <h1 className="singleText serif">Conor</h1>
-            </div>
+          <div className="w-full h-full flex flex-col justify-end items-center px-24 py-20">
             <div className="singleLine">
-              <h1 className="singleText serif">Yuen</h1>
-            </div> */}
-            {/* <div className="singleLine">
-              <h1 className="singleText">Hotswaps</h1>
+              <h1 className="singleText">HOTSWAPS</h1>
             </div>
+            <hr className="w-full border" />
             <div className="singleLine">
-              <h1 className="singleText">EcoHabit</h1>
-            </div> */}
+              <h1 className="singleText">ECOHABIT</h1>
+            </div>
           </div>
         </div>
       )}
