@@ -17,7 +17,7 @@ function App({ count = 80, depth = 80 }) {
     t1.from(".singleText, .ease", {
       y: 400,
       ease: Power4.easeOut,
-      delay: 1,
+      delay: 0.1,
       duration: 1.8,
       stagger: {
         amount: 0.4,

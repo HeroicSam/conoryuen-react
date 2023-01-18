@@ -9,7 +9,7 @@ export default function ParallaxCamera() {
   const cursorPos = { x: 0, y: 0 };
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       cursorPos.x = e.clientX
       cursorPos.y = e.clientY
     }

@@ -1,7 +1,7 @@
 import { Html, useProgress } from '@react-three/drei';
 
 
-function Loader( { setModelsLoaded } ) {
+function Loader( { setModelsLoaded } : { setModelsLoaded: (name: boolean) => void }) {
   const { active, progress, errors, item, loaded, total } = useProgress()
   if ( !active ) {
     setModelsLoaded(!active);
