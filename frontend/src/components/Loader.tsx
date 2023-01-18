@@ -1,15 +1,15 @@
 import { Html, useProgress } from '@react-three/drei';
 
 
-function Loader( { setModelsLoaded } : { setModelsLoaded: (name: boolean) => void }) {
+function Loader( { setIsLoaded } : { setIsLoaded: (name: boolean) => void }) {
   const { active, progress, errors, item, loaded, total } = useProgress()
   if ( !active ) {
-    setModelsLoaded(!active);
+    setIsLoaded(!active);
   };
   return (
     <Html fullscreen>
       <div className="w-full h-full bg-black flex justify-center items-center">
-        <h1 className="text-white">{progress}</h1>
+        <h1 className="text-white stilson">{progress}</h1>
       </div>
     </Html>
   )
