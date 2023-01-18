@@ -6,10 +6,12 @@ import Loader from './components/Loader';
 import Leaf from './components/Leaf';
 import ParallaxCamera from './components/ParallaxCamera';
 import NavBar from './components/NavBar';
+import useWidthBreakpointReached from './utility/useWidthBreakpointReached';
 import { useState, Suspense, useEffect } from 'react';
 
 function App({ count = 20, depth = 80 }) {
   const [modelsLoaded, setModelsLoaded] = useState(false);
+  const isMobile = useWidthBreakpointReached('md');
 
   useEffect(() => {
     const t1 = gsap.timeline();
@@ -29,7 +31,7 @@ function App({ count = 20, depth = 80 }) {
     <>
       {modelsLoaded && (
         <div className="flex flex absolute inset-0 z-50 text-black justify-center">
-          <NavBar />
+          <NavBar isMobile={isMobile} />
           <div className="w-full h-full flex flex-col justify-center items-center px-24 py-20">
             <hr className="w-full border" />
             <div className="singleLine">
