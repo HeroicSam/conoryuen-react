@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/HeroicSam/conoryuen-react#readme",
   "dependencies": {
+    "detect-gpu": "^5.0.7",
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
   }
