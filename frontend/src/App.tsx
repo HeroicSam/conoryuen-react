@@ -2,6 +2,7 @@ import { Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
 import gsap, { Power4 } from 'gsap';
+import { Perf } from 'r3f-perf';
 import Loader from './components/Loader';
 import MiniTotoro from './components/Minitotoro';
 import Leaf from './components/Leaf';
@@ -11,7 +12,7 @@ import NavBar from './components/NavBar';
 import useWidthBreakpointReached from './utility/useWidthBreakpointReached';
 import { useState, Suspense, useEffect } from 'react';
 
-function App({ count = 30, depth = 80 }) {
+function App({ count = 20, depth = 80 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [modelsLoaded, setModelsLoaded] = useState(1);
   const isMobile = useWidthBreakpointReached('md');
@@ -85,16 +86,16 @@ function App({ count = 30, depth = 80 }) {
       )}
       <Canvas gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
         <Suspense fallback={<Loader setIsLoaded={setIsLoaded}/>}>
-          {/* <Perf /> */}
+          <Perf />
           <color attach="background" args={["#ffffff"]} /> 
           <spotLight position={[10, 10, 10]} intensity={1} />
           <Environment preset='apartment' />
           {(modelsLoaded === 1) && Array.from({ length: count }, (_, i) => (<MiniTotoro key={i} z={-(i / count) * depth - 20}/>))}
           {(modelsLoaded === 2) && Array.from({ length: count }, (_, i) => (<Keyboard key={i} z={-(i / count) * depth - 20}/>))}
           {(modelsLoaded === 3) && Array.from({ length: count }, (_, i) => (<Leaf key={i} z={-(i / count) * depth - 20}/>))}
-          <EffectComposer>
+          {/* <EffectComposer>
             <DepthOfField target={[0, 0, depth / 2]} focalLength={0.5} bokehScale={11} height={700} />
-          </EffectComposer>
+          </EffectComposer> */}
           <ParallaxCamera />
         </Suspense>
       </Canvas>
