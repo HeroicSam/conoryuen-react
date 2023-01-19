@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
 import gsap, { Power4 } from 'gsap';
 import Loader from './components/Loader';
+import MiniTotoro from './components/Minitotoro';
 import Leaf from './components/Leaf';
 import Keyboard from './components/Keyboard';
 import ParallaxCamera from './components/ParallaxCamera';
@@ -35,27 +36,43 @@ function App({ count = 30, depth = 80 }) {
         <div className="flex flex absolute inset-0 z-50 text-black justify-center">
           <NavBar isMobile={isMobile} />
           <div className={`
-            w-full h-full flex flex-col justify-start items-center px-24 py-20
+            w-full h-full flex flex-col justify-end items-center px-24 py-20
             ${isMobile ? 'px-8 py-6' : null}
           `}>
             <hr className="w-full border" />
             <div 
               className="w-full h-40 relative overflow-hidden"
-              onMouseDown={() => {
+              onMouseEnter={() => {
                 setModelsLoaded(2)
               }}
-              // onMouseLeave={() => {
-              //   setModelsLoaded(1)
-              // }}
+              onMouseLeave={() => {
+                setModelsLoaded(1)
+              }}
             >
               <h1 className="singleText absolute text-9xl stilson text-black">Hotswaps</h1>
             </div>
             <hr className="w-full border" />
-            <div className="w-full h-40 relative overflow-hidden">
+            <div 
+              className="w-full h-40 relative overflow-hidden"
+              onMouseEnter={() => {
+                setModelsLoaded(3)
+              }}
+              onMouseLeave={() => {
+                setModelsLoaded(1)
+              }}
+            >
               <h1 className="singleText absolute text-9xl stilson ml-10 text-black">EcoHabit</h1>
             </div>
             <hr className="w-full border" />
-            <div className="w-full h-40 relative overflow-hidden">
+            <div 
+              className="w-full h-40 relative overflow-hidden"
+              onMouseEnter={() => {
+                setModelsLoaded(4)
+              }}
+              onMouseLeave={() => {
+                setModelsLoaded(1)
+              }}
+            >
               <h1 className="singleText absolute text-9xl stilson ml-20 text-black">Against All Odds</h1>
             </div>
             <hr className="w-full border" />
@@ -72,8 +89,9 @@ function App({ count = 30, depth = 80 }) {
           <color attach="background" args={["#ffffff"]} /> 
           <spotLight position={[10, 10, 10]} intensity={1} />
           <Environment preset='apartment' />
-          {(modelsLoaded === 1) && Array.from({ length: count }, (_, i) => (<Leaf key={i} z={-(i / count) * depth - 20}/>))}
+          {(modelsLoaded === 1) && Array.from({ length: count }, (_, i) => (<MiniTotoro key={i} z={-(i / count) * depth - 20}/>))}
           {(modelsLoaded === 2) && Array.from({ length: count }, (_, i) => (<Keyboard key={i} z={-(i / count) * depth - 20}/>))}
+          {(modelsLoaded === 3) && Array.from({ length: count }, (_, i) => (<Leaf key={i} z={-(i / count) * depth - 20}/>))}
           <EffectComposer>
             <DepthOfField target={[0, 0, depth / 2]} focalLength={0.5} bokehScale={11} height={700} />
           </EffectComposer>
