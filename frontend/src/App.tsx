@@ -1,25 +1,24 @@
 import { Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
 import gsap, { Power4 } from 'gsap';
-import { Perf } from 'r3f-perf';
 import Loader from './components/Loader';
 import MiniTotoro from './components/Minitotoro';
 import Leaf from './components/Leaf';
 import Keyboard from './components/Keyboard';
+import Jordan from './components/Jordan';
 import ParallaxCamera from './components/ParallaxCamera';
 import NavBar from './components/NavBar';
 import useWidthBreakpointReached from './utility/useWidthBreakpointReached';
 import { useState, Suspense, useEffect } from 'react';
 
-function App({ count = 20, depth = 80 }) {
+function App({ count = 30, depth = 80 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [modelsLoaded, setModelsLoaded] = useState(1);
+  const [isActive, setIsActive] = useState(false);
   const isMobile = useWidthBreakpointReached('md');
 
   useEffect(() => {
     const t1 = gsap.timeline();
-    const t2 = gsap
     t1.from(".singleText, .ease", {
       y: 400,
       ease: Power4.easeOut,
@@ -29,8 +28,23 @@ function App({ count = 20, depth = 80 }) {
         amount: 0.4,
       },
     });
+    console.log('running')
   }, [isLoaded]);
 
+  function handleAccordion() {
+    const t2 = gsap.timeline();
+    const open = t2.to(".accordion" , {
+      height: 400,
+      ease: Power4.easeOut,
+    })
+    if (isActive) {
+      console.log('reversing')
+      open.reverse(1);
+    } else {
+      open.play()
+    }
+  }
+  console.log(isLoaded)
   return (
     <>
       {isLoaded && (
@@ -42,19 +56,23 @@ function App({ count = 20, depth = 80 }) {
           `}>
             <hr className="w-full border" />
             <div 
-              className="w-full h-40 relative overflow-hidden"
+              className="accordion w-full h-20 relative overflow-hidden"
               onMouseEnter={() => {
                 setModelsLoaded(2)
               }}
               onMouseLeave={() => {
                 setModelsLoaded(1)
               }}
+              onClick={() => {
+                setIsActive(!isActive);
+                handleAccordion();
+              }}
             >
-              <h1 className="singleText absolute text-9xl stilson text-black">Hotswaps</h1>
+              <h1 className="singleText absolute text-5xl leading-normal stilson text-black">Hotswaps</h1>
             </div>
             <hr className="w-full border" />
             <div 
-              className="w-full h-40 relative overflow-hidden"
+              className="w-full h-20 relative overflow-hidden"
               onMouseEnter={() => {
                 setModelsLoaded(3)
               }}
@@ -62,11 +80,11 @@ function App({ count = 20, depth = 80 }) {
                 setModelsLoaded(1)
               }}
             >
-              <h1 className="singleText absolute text-9xl stilson ml-10 text-black">EcoHabit</h1>
+              <h1 className="singleText absolute text-5xl leading-normal stilson ml-4 text-black">EcoHabit</h1>
             </div>
             <hr className="w-full border" />
             <div 
-              className="w-full h-40 relative overflow-hidden"
+              className="w-full h-20 relative overflow-hidden"
               onMouseEnter={() => {
                 setModelsLoaded(4)
               }}
@@ -74,11 +92,11 @@ function App({ count = 20, depth = 80 }) {
                 setModelsLoaded(1)
               }}
             >
-              <h1 className="singleText absolute text-9xl stilson ml-20 text-black">Against All Odds</h1>
+              <h1 className="singleText absolute text-5xl leading-normal stilson ml-8 text-black">Against All Odds</h1>
             </div>
             <hr className="w-full border" />
-            <div className="w-full h-40 relative overflow-hidden">
-              <h1 className="singleText absolute text-9xl stilson ml-32 text-black">This Site!</h1>
+            <div className="w-full h-20 relative overflow-hidden">
+              <h1 className="singleText absolute text-5xl leading-normal stilson ml-12 text-black">This Site!</h1>
             </div>
             <hr className="w-full border" />
           </div>
@@ -86,28 +104,18 @@ function App({ count = 20, depth = 80 }) {
       )}
       <Canvas gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
         <Suspense fallback={<Loader setIsLoaded={setIsLoaded}/>}>
-          <Perf />
-          <color attach="background" args={["#ffffff"]} /> 
+          <color attach="background" args={["#F6F6F6"]} /> 
           <spotLight position={[10, 10, 10]} intensity={1} />
           <Environment preset='apartment' />
           {(modelsLoaded === 1) && Array.from({ length: count }, (_, i) => (<MiniTotoro key={i} z={-(i / count) * depth - 20}/>))}
           {(modelsLoaded === 2) && Array.from({ length: count }, (_, i) => (<Keyboard key={i} z={-(i / count) * depth - 20}/>))}
-          {(modelsLoaded === 3) && Array.from({ length: count }, (_, i) => (<Leaf key={i} z={-(i / count) * depth - 20}/>))}
-          {/* <EffectComposer>
-            <DepthOfField target={[0, 0, depth / 2]} focalLength={0.5} bokehScale={11} height={700} />
-          </EffectComposer> */}
+          {(modelsLoaded === 3) && Array.from({ length: 80 }, (_, i) => (<Leaf key={i} z={-(i / count) * depth - 20}/>))}
+          {(modelsLoaded === 4) && Array.from({ length: 5 }, (_, i) => (<Jordan key={i} z={-(i / count) * depth - 20}/>))}
           <ParallaxCamera />
         </Suspense>
       </Canvas>
     </>
   )
 }
-
-// FFBF52
-// ffbf40
-// Changing backgrounds whnen hovering over menu items, e.g falling keyboards, plastic bottles lol, etc.
-// Hover effect for menu items -> left to right font color transition, or bold -> semibold effect.
-// Scroll down automatically selects different links
-// Info block maybe can scroll as well, or transition in and out
 
 export default App;
