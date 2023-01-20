@@ -1,15 +1,14 @@
 import { Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import gsap, { Power4 } from 'gsap';
 import Loader from './components/Loader';
 import MiniTotoro from './components/Minitotoro';
 import Leaf from './components/Leaf';
 import Keyboard from './components/Keyboard';
-import Jordan from './components/Jordan';
 import ParallaxCamera from './components/ParallaxCamera';
 import NavBar from './components/NavBar';
 import useWidthBreakpointReached from './utility/useWidthBreakpointReached';
 import { useState, Suspense, useEffect } from 'react';
+import gsap, { Power4 } from 'gsap'; // THIS NEEDS TO BE THE LAST IMPORT OR EVERYTHING FUCKIN BREAKS
 
 function App({ count = 30, depth = 80 }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -28,27 +27,26 @@ function App({ count = 30, depth = 80 }) {
         amount: 0.4,
       },
     });
-    console.log('running')
   }, [isLoaded]);
 
-  function handleAccordion() {
-    const t2 = gsap.timeline();
-    const open = t2.to(".accordion" , {
-      height: 400,
-      ease: Power4.easeOut,
-    })
-    if (isActive) {
-      console.log('reversing')
-      open.reverse(1);
-    } else {
-      open.play()
-    }
-  }
+  // function handleAccordion() {
+  //   const t2 = gsap.timeline();
+  //   const open = t2.to(".accordion" , {
+  //     height: 400,
+  //     ease: Power4.easeOut,
+  //   })
+  //   if (isActive) {
+  //     console.log('reversing')
+  //     open.reverse(1);
+  //   } else {
+  //     open.play()
+  //   }
+  // }
   console.log(isLoaded)
   return (
     <>
       {isLoaded && (
-        <div className="flex flex absolute inset-0 z-50 text-black justify-center">
+        <div className="flex absolute inset-0 z-50 text-black justify-center">
           <NavBar isMobile={isMobile} />
           <div className={`
             w-full h-full flex flex-col justify-end items-center px-24 py-20
@@ -65,7 +63,7 @@ function App({ count = 30, depth = 80 }) {
               }}
               onClick={() => {
                 setIsActive(!isActive);
-                handleAccordion();
+                // handleAccordion();
               }}
             >
               <h1 className="singleText absolute text-5xl leading-normal stilson text-black">Hotswaps</h1>
@@ -110,7 +108,6 @@ function App({ count = 30, depth = 80 }) {
           {(modelsLoaded === 1) && Array.from({ length: count }, (_, i) => (<MiniTotoro key={i} z={-(i / count) * depth - 20}/>))}
           {(modelsLoaded === 2) && Array.from({ length: count }, (_, i) => (<Keyboard key={i} z={-(i / count) * depth - 20}/>))}
           {(modelsLoaded === 3) && Array.from({ length: 80 }, (_, i) => (<Leaf key={i} z={-(i / count) * depth - 20}/>))}
-          {(modelsLoaded === 4) && Array.from({ length: 5 }, (_, i) => (<Jordan key={i} z={-(i / count) * depth - 20}/>))}
           <ParallaxCamera />
         </Suspense>
       </Canvas>
