@@ -14,14 +14,14 @@ import gsap, { Power4 } from 'gsap'; // THIS NEEDS TO BE THE LAST IMPORT OR EVER
 function App({ count = 40, depth = 80 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [modelsLoaded, setModelsLoaded] = useState(1);
-  const [isActive, setIsActive] = useState(false);
   const isMobile = useWidthBreakpointReached('md');
 
   const wordOneRef = useRef(null);
   const wordTwoRef = useRef(null);
   const wordThreeRef = useRef(null);
+  const wordFourRef = useRef(null);
 
-  const refArray = [wordOneRef, wordTwoRef, wordThreeRef];
+  const refArray = [wordOneRef, wordTwoRef, wordThreeRef, wordFourRef];
 
   useLayoutEffect(() => {
     const t1 = gsap.timeline();
@@ -41,15 +41,13 @@ function App({ count = 40, depth = 80 }) {
       t2.from(element, {
         y: 400,
         ease: Power4.easeOut,
-        duration: 1.8+i,
-        delay: 0.65 + i,
+        duration: 1.4,
       }).to(element, {
         y: -400,
         ease: Power4.easeIn,
-        duration: 1.8
-      }).repeat(-1)
+        duration: 1.4
+      }).repeat(-1).repeatDelay(5.1).delay(.85 + (2 * i))
     })
-
 
   }, [isLoaded]);
 
@@ -82,9 +80,10 @@ function App({ count = 40, depth = 80 }) {
               <h1 className='ease text-gray-800 domaine text-[4rem]'>Frontend</h1>
             </div>
             <div className='w-full h-[6rem] relative overflow-hidden mt-[-1rem]'>
-              <h1 ref={wordOneRef} className='text-gray-800 domaine text-[4rem]'>Developer</h1>
-              <h1 ref={wordTwoRef} className='text-gray-800 domaine text-[4rem]'>Designer</h1>
-              <h1 ref={wordThreeRef} className='text-gray-800 domaine text-[4rem]'>Enthusiast</h1>
+              <h1 ref={wordOneRef} className='text-gray-800 domaine text-[4rem] absolute'>Developer</h1>
+              <h1 ref={wordTwoRef} className='text-gray-800 domaine text-[4rem] absolute'>Designer</h1>
+              <h1 ref={wordThreeRef} className='text-gray-800 domaine text-[4rem] absolute'>Enthusiast</h1>
+              <h1 ref={wordFourRef} className='text-gray-800 domaine text-[4rem] absolute'>Guy</h1>
             </div>
             {/* <hr className="w-full border" />
             <div 
