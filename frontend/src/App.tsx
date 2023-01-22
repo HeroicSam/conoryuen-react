@@ -7,18 +7,25 @@ import Keyboard from './components/Keyboard';
 import ParallaxCamera from './components/ParallaxCamera';
 import NavBar from './components/NavBar';
 import useWidthBreakpointReached from './utility/useWidthBreakpointReached';
-import { useState, Suspense, useEffect } from 'react';
+import { useState, Suspense, useLayoutEffect, useRef } from 'react';
+import './fonts/TestDomaineDisplay-Bold.otf';
 import gsap, { Power4 } from 'gsap'; // THIS NEEDS TO BE THE LAST IMPORT OR EVERYTHING FUCKIN BREAKS
 
-function App({ count = 30, depth = 80 }) {
+function App({ count = 40, depth = 80 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [modelsLoaded, setModelsLoaded] = useState(1);
   const [isActive, setIsActive] = useState(false);
   const isMobile = useWidthBreakpointReached('md');
 
-  useEffect(() => {
+  const wordOneRef = useRef(null);
+  const wordTwoRef = useRef(null);
+  const wordThreeRef = useRef(null);
+
+  const refArray = [wordOneRef, wordTwoRef, wordThreeRef];
+
+  useLayoutEffect(() => {
     const t1 = gsap.timeline();
-    t1.from(".singleText, .ease", {
+    t1.from(".ease", {
       y: 400,
       ease: Power4.easeOut,
       delay: 0.1,
@@ -26,7 +33,24 @@ function App({ count = 30, depth = 80 }) {
       stagger: {
         amount: 0.4,
       },
-    });
+    })
+
+    refArray.forEach((ele, i) => {
+      const element = ele.current;
+      const t2 = gsap.timeline()
+      t2.from(element, {
+        y: 400,
+        ease: Power4.easeOut,
+        duration: 1.8+i,
+        delay: 0.65 + i,
+      }).to(element, {
+        y: -400,
+        ease: Power4.easeIn,
+        duration: 1.8
+      }).repeat(-1)
+    })
+
+
   }, [isLoaded]);
 
   // function handleAccordion() {
@@ -42,17 +66,27 @@ function App({ count = 30, depth = 80 }) {
   //     open.play()
   //   }
   // }
-  console.log(isLoaded)
   return (
     <>
       {isLoaded && (
         <div className="flex absolute inset-0 z-50 text-black justify-center">
           <NavBar isMobile={isMobile} />
           <div className={`
-            w-full h-full flex flex-col justify-end items-center px-24 py-20
+            w-full h-full flex flex-col justify-start items-start px-16 py-20
             ${isMobile ? 'px-8 py-6' : null}
           `}>
-            <hr className="w-full border" />
+            <div className='w-full h-[6rem] relative overflow-hidden mt-20'>
+              <h1 className='ease text-gray-800 domaine text-[4rem]'>I'm a</h1>
+            </div>
+            <div className='w-full h-[6rem] relative overflow-hidden mt-[-1rem]'>
+              <h1 className='ease text-gray-800 domaine text-[4rem]'>Frontend</h1>
+            </div>
+            <div className='w-full h-[6rem] relative overflow-hidden mt-[-1rem]'>
+              <h1 ref={wordOneRef} className='text-gray-800 domaine text-[4rem]'>Developer</h1>
+              <h1 ref={wordTwoRef} className='text-gray-800 domaine text-[4rem]'>Designer</h1>
+              <h1 ref={wordThreeRef} className='text-gray-800 domaine text-[4rem]'>Enthusiast</h1>
+            </div>
+            {/* <hr className="w-full border" />
             <div 
               className="accordion w-full h-20 relative overflow-hidden"
               onMouseEnter={() => {
@@ -96,7 +130,7 @@ function App({ count = 30, depth = 80 }) {
             <div className="w-full h-20 relative overflow-hidden">
               <h1 className="singleText absolute text-5xl leading-normal stilson ml-12 text-black">This Site!</h1>
             </div>
-            <hr className="w-full border" />
+            <hr className="w-full border" /> */}
           </div>
         </div>
       )}
