@@ -87,7 +87,7 @@ function App({ count = 40, depth = 80 }) {
               <h1 ref={wordFourRef} className='text-gray-800 domaine text-[4rem] absolute'>Guy</h1>
             </div>
             <div className='flex justify-center forma overflow-hidden mt-6'>
-              <p className='ease forma text-center'>with an unhealthy obsession for motion design and dynamic user experiences.</p>
+              <p className='ease forma text-center text-gray-800'>with an unhealthy obsession for motion design and dynamic user experiences.</p>
             </div>
             {/* <hr className="w-full border" />
             <div 
