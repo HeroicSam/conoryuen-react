@@ -10,6 +10,7 @@ import useWidthBreakpointReached from './utility/useWidthBreakpointReached';
 import { useState, Suspense, useLayoutEffect, useRef } from 'react';
 import './fonts/TestDomaineDisplay-Bold.otf';
 import gsap, { Power4 } from 'gsap'; // THIS NEEDS TO BE THE LAST IMPORT OR EVERYTHING FUCKIN BREAKS
+import { Fog } from 'three';
 
 function App({ count = 40, depth = 80 }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -73,17 +74,20 @@ function App({ count = 40, depth = 80 }) {
             w-full h-full flex flex-col justify-start items-start px-16 py-20
             ${isMobile ? 'px-8 py-6' : null}
           `}>
-            <div className='w-full h-[6rem] relative overflow-hidden mt-20'>
+            <div className='flex justify-center w-full h-[6rem] relative overflow-hidden mt-20'>
               <h1 className='ease text-gray-800 domaine text-[4rem]'>I'm a</h1>
             </div>
-            <div className='w-full h-[6rem] relative overflow-hidden mt-[-1rem]'>
+            <div className='flex justify-center w-full h-[6rem] relative overflow-hidden mt-[-1rem]'>
               <h1 className='ease text-gray-800 domaine text-[4rem]'>Frontend</h1>
             </div>
-            <div className='w-full h-[6rem] relative overflow-hidden mt-[-1rem]'>
+            <div className='flex justify-center w-full h-[6rem] relative overflow-hidden mt-[-1rem]'>
               <h1 ref={wordOneRef} className='text-gray-800 domaine text-[4rem] absolute'>Developer</h1>
               <h1 ref={wordTwoRef} className='text-gray-800 domaine text-[4rem] absolute'>Designer</h1>
               <h1 ref={wordThreeRef} className='text-gray-800 domaine text-[4rem] absolute'>Enthusiast</h1>
               <h1 ref={wordFourRef} className='text-gray-800 domaine text-[4rem] absolute'>Guy</h1>
+            </div>
+            <div className='flex justify-center forma overflow-hidden mt-6'>
+              <p className='ease forma text-center'>with an unhealthy obsession for motion design and dynamic user experiences.</p>
             </div>
             {/* <hr className="w-full border" />
             <div 
