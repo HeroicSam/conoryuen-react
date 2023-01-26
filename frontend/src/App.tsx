@@ -10,12 +10,18 @@ import useWidthBreakpointReached from './utility/useWidthBreakpointReached';
 import { useState, Suspense, useLayoutEffect, useRef } from 'react';
 import './fonts/TestDomaineDisplay-Bold.otf';
 import gsap, { Power4 } from 'gsap'; // THIS NEEDS TO BE THE LAST IMPORT OR EVERYTHING FUCKIN BREAKS
-import { Fog } from 'three';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App({ count = 40, depth = 80 }) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isActive, setIsActive] = useState(false)
   const [modelsLoaded, setModelsLoaded] = useState(1);
   const isMobile = useWidthBreakpointReached('md');
+
+  const pageRef = useRef(null);
+  const canvasRef = useRef(null);
 
   const wordOneRef = useRef(null);
   const wordTwoRef = useRef(null);
@@ -36,43 +42,55 @@ function App({ count = 40, depth = 80 }) {
       },
     })
 
-    refArray.forEach((ele, i) => {
-      const element = ele.current;
-      const t2 = gsap.timeline()
-      t2.from(element, {
-        y: 400,
-        ease: Power4.easeOut,
-        duration: 1.4,
-      }).to(element, {
-        y: -400,
-        ease: Power4.easeIn,
-        duration: 1.4
-      }).repeat(-1).repeatDelay(5.1).delay(.85 + (2 * i))
+    const pageEle = pageRef.current;
+
+    const t2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: pageEle,
+        start: "top top",
+        end: "bottom 100%",
+        scrub: true,
+      }
     })
+
+    // refArray.forEach((ele, i) => {
+    //   const element = ele.current;
+    //   const t2 = gsap.timeline()
+    //   t2.from(element, {
+    //     y: 400,
+    //     ease: Power4.easeOut,
+    //     duration: 1.4,
+    //   }).to(element, {
+    //     y: -400,
+    //     ease: Power4.easeIn,
+    //     duration: 1.4
+    //   }).repeat(-1).repeatDelay(5.1).delay(.85 + (2 * i))
+    // })
 
   }, [isLoaded]);
 
-  // function handleAccordion() {
-  //   const t2 = gsap.timeline();
-  //   const open = t2.to(".accordion" , {
-  //     height: 400,
-  //     ease: Power4.easeOut,
-  //   })
-  //   if (isActive) {
-  //     console.log('reversing')
-  //     open.reverse(1);
-  //   } else {
-  //     open.play()
-  //   }
-  // }
+  function handleAccordion() {
+    const t2 = gsap.timeline();
+    const open = t2.to(".accordion" , {
+      height: 400,
+      ease: Power4.easeOut,
+    })
+    if (isActive) {
+      console.log('reversing')
+      open.reverse();
+    } else {
+      open.play()
+    }
+  }
+
   return (
     <>
       {isLoaded && (
-        <div className="flex absolute inset-0 z-50 text-black justify-center">
+        <div ref={pageRef} className="flex flex-col w-full absolute left-0 right-0 z-50 text-black justify-center overflow-y-scroll">
           <NavBar isMobile={isMobile} />
           <div className={`
-            w-full h-full flex flex-col justify-start items-start px-16 py-20
-            ${isMobile ? 'px-8 py-6' : null}
+            w-full h-screen flex flex-col justify-start items-center px-16 py-20
+            ${isMobile ? 'px-0 py-4' : null}
           `}>
             <div className='flex justify-center w-full h-[6rem] relative overflow-hidden mt-20'>
               <h1 className='ease text-gray-800 domaine text-[4rem]'>I'm a</h1>
@@ -81,15 +99,20 @@ function App({ count = 40, depth = 80 }) {
               <h1 className='ease text-gray-800 domaine text-[4rem]'>Frontend</h1>
             </div>
             <div className='flex justify-center w-full h-[6rem] relative overflow-hidden mt-[-1rem]'>
-              <h1 ref={wordOneRef} className='text-gray-800 domaine text-[4rem] absolute'>Developer</h1>
-              <h1 ref={wordTwoRef} className='text-gray-800 domaine text-[4rem] absolute'>Designer</h1>
+              <h1 ref={wordOneRef} className='ease text-gray-800 domaine text-[4rem] absolute'>Developer</h1>
+              {/* <h1 ref={wordTwoRef} className='text-gray-800 domaine text-[4rem] absolute'>Designer</h1>
               <h1 ref={wordThreeRef} className='text-gray-800 domaine text-[4rem] absolute'>Enthusiast</h1>
-              <h1 ref={wordFourRef} className='text-gray-800 domaine text-[4rem] absolute'>Guy</h1>
+              <h1 ref={wordFourRef} className='text-gray-800 domaine text-[4rem] absolute'>Guy</h1> */}
             </div>
-            <div className='flex justify-center forma overflow-hidden mt-6'>
-              <p className='ease forma text-center text-gray-800'>with an unhealthy obsession for motion design and dynamic user experiences.</p>
+            <div className='flex justify-center items-center forma overflow-hidden mt-6 w-4/5'>
+              <p className='ease forma text-center text-gray-600 w-4/5'>with an unhealthy obsession for motion design and dynamic user experiences.</p>
             </div>
-            {/* <hr className="w-full border" />
+            <div className='forma mt-auto text-[11px]'>
+              <a>Github</a>{"  /  "}<a>LinkedIn</a>
+            </div>
+          </div>
+          <div className="h-max flex flex-col">
+            <hr className="w-full border" />
             <div 
               className="accordion w-full h-20 relative overflow-hidden"
               onMouseEnter={() => {
@@ -103,7 +126,7 @@ function App({ count = 40, depth = 80 }) {
                 // handleAccordion();
               }}
             >
-              <h1 className="singleText absolute text-5xl leading-normal stilson text-black">Hotswaps</h1>
+              <h1 className="singleText absolute text-5xl leading-normal forma text-gray-800">Hotswaps</h1>
             </div>
             <hr className="w-full border" />
             <div 
@@ -133,11 +156,11 @@ function App({ count = 40, depth = 80 }) {
             <div className="w-full h-20 relative overflow-hidden">
               <h1 className="singleText absolute text-5xl leading-normal stilson ml-12 text-black">This Site!</h1>
             </div>
-            <hr className="w-full border" /> */}
+            <hr className="w-full border" />
           </div>
         </div>
       )}
-      <Canvas gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
+      <Canvas ref={canvasRef} gl={{ alpha: false}} camera={{near: 0.01, far: 110, fov: 20 }} >
         <Suspense fallback={<Loader setIsLoaded={setIsLoaded}/>}>
           <color attach="background" args={["#F6F6F6"]} /> 
           <spotLight position={[10, 10, 10]} intensity={1} />

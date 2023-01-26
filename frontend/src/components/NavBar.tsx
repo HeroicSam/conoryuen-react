@@ -1,7 +1,7 @@
 function NavBar({ isMobile }: { isMobile: boolean }) {
   return (
     <div className={`
-      fixed flex w-full px-16 py-10 justify-between text-lg overflow-hidden forma text-gray-800
+      fixed flex w-full top-0 px-16 py-10 justify-between text-lg overflow-hidden forma text-gray-800
       ${isMobile ? 'px-8 py-6 text-base' : null}
     `}>
       <div className="ease">CONOR YUEN</div>
