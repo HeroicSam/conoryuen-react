@@ -4,7 +4,6 @@ function Loader( { setIsLoaded } ) {
   const { active, progress, errors, item, loaded, total } = useProgress()
   console.log(active, errors);
   if ( !active ) {
-    console.log('setting active')
     setIsLoaded(!active);
   };
   return (
