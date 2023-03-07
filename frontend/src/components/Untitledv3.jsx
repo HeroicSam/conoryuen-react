@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
-import ShaderUniforms from './Uniforms'
+import ShaderUniforms from '../utility/CalculateShaderUniforms'
 
 export function Model(props) {
   const { nodes, materials } = useGLTF('/untitledv3.glb')
