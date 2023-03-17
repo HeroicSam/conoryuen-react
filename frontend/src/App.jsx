@@ -28,8 +28,8 @@ function App() {
   const VideoScene = () => {
     const size = useAspect(1920, 1080)
     return (
-      <mesh position={[0, 4, 6]} rotation={[0, -Math.PI, 0]}>
-        <planeGeometry args={[10,6,1]} rotateY={3.14} />
+      <mesh position={[0, 3, 5]} rotation={[0, -Math.PI, 0]}>
+        <planeGeometry args={[8,4.5,1]} rotateY={3.14} />
         <VideoMaterial url='video.mp4' />
       </mesh>
     )
@@ -37,9 +37,9 @@ function App() {
 
   return (
     <>
-      <Canvas gl={{ alpha: true}} camera={{near: 0.01, far: 60, fov: 35, position: [0, 7, -15]}} >
+      <Canvas gl={{ alpha: true}} camera={{near: 0.01, far: 60, fov: 35, position: [0, 5, -15]}} >
         <Lights />
-        <OrbitControls target={[0, 3, 5]} />
+        <OrbitControls target={[0, 2, 5]} />
         <Suspense fallback={<Loader setIsLoaded={setIsLoaded}/>}>
           <color attach="background" args={["#000"]} /> 
           <Model />
