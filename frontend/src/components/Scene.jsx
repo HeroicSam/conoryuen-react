@@ -32,18 +32,19 @@ export function Scene({ materials, toTablet }) {
       <mesh castShadow geometry={nodes.WoodBase.geometry} material={materials.woodMaterial} />
       <mesh castShadow geometry={nodes.Pegs02.geometry} material={materials.redMaterial} />
       <mesh castShadow geometry={nodes.Wires03.geometry} material={nodes.Wires03.material} />
-      <mesh castShadow geometry={nodes.Tablet.geometry} material={materials.blackKeyMaterial} />
-      <mesh geometry={nodes.Logo.geometry} material={materials['Material.001']} position={[-0.05, 0.93, 1]} rotation={[Math.PI / 2, 0, 0]} scale={0.04} />
-      <Html
-          position={[0.1095, 1.213, .828]}
-          rotation-x={-Math.PI / 9}
-          distanceFactor={.056}
-          wrapperClass="tablet"
-          occlude
-          transform
-        >
+      <mesh castShadow geometry={nodes.Tablet.geometry} material={materials.blackKeyMaterial}>
+        <Html
+            position={[0.076, 1.192, .835]}
+            rotation-x={-Math.PI / 9}
+            distanceFactor={.056}
+            wrapperClass="tablet"
+            occlude
+            transform
+          >
           <iframe src="./src/tablet/tablet.html" />
         </Html>
+      </mesh>
+      <mesh geometry={nodes.Logo.geometry} material={materials['Material.001']} position={[-0.05, 0.93, 1]} rotation={[Math.PI / 2, 0, 0]} scale={0.04} />
     </>
 
   )
