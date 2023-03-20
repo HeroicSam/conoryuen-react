@@ -1,12 +1,10 @@
 import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
-import Tablet from './Tablet'
+import { useGLTF, Html } from '@react-three/drei'
 
-export function Model({ materials, toTablet }) {
-  const { nodes } = useGLTF('/grandpiano2.glb')
+export function Scene({ materials, toTablet }) {
+  const { nodes } = useGLTF('/scene.glb')
   return (
     <>
-      <Tablet />
       <mesh castShadow geometry={nodes.Main.geometry} material={materials.whiteKeyMaterial} />
       <mesh castShadow geometry={nodes.blackkey.geometry} material={materials.blackKeyMaterial} />
       <mesh castShadow geometry={nodes.blackkey001.geometry} material={materials.blackKeyMaterial} />
@@ -36,9 +34,19 @@ export function Model({ materials, toTablet }) {
       <mesh castShadow geometry={nodes.Wires03.geometry} material={nodes.Wires03.material} />
       <mesh castShadow geometry={nodes.Tablet.geometry} material={materials.blackKeyMaterial} />
       <mesh geometry={nodes.Logo.geometry} material={materials['Material.001']} position={[-0.05, 0.93, 1]} rotation={[Math.PI / 2, 0, 0]} scale={0.04} />
+      <Html
+          position={[0.1095, 1.213, .828]}
+          rotation-x={-Math.PI / 9}
+          distanceFactor={.056}
+          wrapperClass="tablet"
+          occlude
+          transform
+        >
+          <iframe src="./src/tablet/tablet.html" />
+        </Html>
     </>
 
   )
 }
 
-useGLTF.preload('/grandpiano2.glb')
+useGLTF.preload('/scene.glb')

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body,
 :root,
@@ -12,4 +16,8 @@ body,
   width: 1200px;
   height: 1600px;
   border-radius: 2%;
+}
+
+.div {
+  background-color: white;
 }

@@ -5,7 +5,7 @@ import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { EffectComposer, Noise, Bloom, Vignette, DepthOfField, Outline } from '@react-three/postprocessing'
 
-import { Model } from './components/Grandpiano2'
+import { Scene } from './components/Scene'
 
 function App() {
 
@@ -36,7 +36,7 @@ function App() {
 
       return (
         <>
-          <Model castshadow materials={materials} toTablet={toTablet} />
+          <Scene castshadow materials={materials} toTablet={toTablet} />
         </>
       )
   } 

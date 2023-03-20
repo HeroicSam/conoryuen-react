@@ -1,4 +1,4 @@
-function NavBar({ isMobile }: { isMobile: boolean }) {
+function NavBar({ isMobile }) {
   return (
     <div className={`
       fixed flex w-full top-0 px-16 py-10 justify-between text-lg overflow-hidden forma text-gray-800
