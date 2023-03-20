@@ -1,15 +1,12 @@
 import { useState, useRef } from 'react'
 import { useThree } from '@react-three/fiber';
 import { Html } from "@react-three/drei";
-import gsap from 'gsap'
 
 function Tablet({ toTablet }) {
 
   const { camera } = useThree();
   const tabletRef = useRef(null);
   const [tabletToggle, setTabletToggle] = useState(false);
-
-  console.log(tabletRef)
 
   return (
     <Html
@@ -21,7 +18,12 @@ function Tablet({ toTablet }) {
       occlude
       transform
     >
-      {!tabletToggle && <img src='/duck.jpg' onPointerDown={() => toTablet()} /> }
+      {!tabletToggle && (
+        <div className="w-[1200px] h-[1600px]" onPointerDown={() => toTablet()}>
+          <div className='w-full h-full absolute text-white'>Hello</div>
+          <img className="w-full h-full object-cover" src='/pape2.jpg' />
+        </div>
+      )}
       {tabletToggle && <iframe src="./src/experience/world/tablet/tablet.html" />}
     </Html>
   )
