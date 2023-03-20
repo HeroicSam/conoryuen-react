@@ -1,58 +1,88 @@
-import { useState, useRef, Suspense } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
-import { OrbitControls, Html, useAspect, useVideoTexture } from '@react-three/drei';
-import useWidthBreakpointReached from './utility/useWidthBreakpointReached';
-import Loader from './components/Loader';
-// import Scene from './components/Scene';
-import { Model } from './components/Untitledv3';
+import { useState, useMemo, useRef } from 'react'
+import * as THREE from 'three'
+import gsap from 'gsap'
+import { Canvas, useThree } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import { EffectComposer, Noise, Bloom, Vignette, DepthOfField, Outline } from '@react-three/postprocessing'
+
+import { Model } from './components/Grandpiano2'
 
 function App() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const isMobile = useWidthBreakpointReached('md');
 
+  const [orbitEnabled, setOrbitEnabled] = useState(true)
+  const orbitRef = useRef()
 
-  const Lights = () => {
-    const light = useRef(null);
-    return (
-      <group>
-        <rectAreaLight position={[0, 6, 1.1]} intensity={2} ref={light} rotation={[- Math.PI / 2, 0, 0]} />
-      </group>
-    )
-  }
+  function CameraControls(props){
+    const camera = useThree((state) => state.camera)
+    camera.lookAt(0, 1.5, 0)
 
-  const VideoMaterial = ({ url }) => {
-    const texture = useVideoTexture(url)
-    return <meshBasicMaterial map={texture} toneMapped={false} />
-  }
+    function toTablet(){
+      
+      gsap.to(
+        camera.position,
+        {
+          x: .09,
+          y: 1.91,
+          z: 1.1,
+          duration: 2,
+          ease: 'power3.inOut',
+          onComplete: () => {
+            setOrbitEnabled(!orbitEnabled)
+            camera.lookAt(.1, 1.79, 1)
+          }
+        }
+      )
+    }
 
-  const VideoScene = () => {
-    const size = useAspect(1920, 1080)
-    return (
-      <mesh position={[0, 3, 5]} rotation={[0, -Math.PI, 0]}>
-        <planeGeometry args={[8,4.5,1]} rotateY={3.14} />
-        <VideoMaterial url='video.mp4' />
-      </mesh>
-    )
-  }
+      return (
+        <>
+          <Model castshadow materials={materials} toTablet={toTablet} />
+        </>
+      )
+  } 
+
+  const materials = useMemo(() => {
+    return {
+      pianoMaterial: new THREE.MeshToonMaterial({
+        color: new THREE.Color('#dfdfdf')
+      }),
+      blackKeyMaterial: new THREE.MeshToonMaterial({
+        color: new THREE.Color('black')
+      }),
+      whiteKeyMaterial: new THREE.MeshLambertMaterial({
+        color: new THREE.Color('#ffffff')
+      }),
+      redMaterial: new THREE.MeshToonMaterial({
+        color: new THREE.Color('#f62c2f')
+      }),
+      brassMaterial: new THREE.MeshStandardMaterial({
+        // color: new THREE.Color('#E1C16E'),
+        color: new THREE.Color('#b9853c'),
+
+      }),
+      woodMaterial: new THREE.MeshStandardMaterial({
+        color: new THREE.Color('#a45724')
+      })
+    }
+  })
 
   return (
-    <>
-      <Canvas gl={{ alpha: true}} camera={{near: 0.01, far: 60, fov: 35, position: [0, 5, -15]}} >
-        <Lights />
-        <OrbitControls target={[0, 2, 5]} />
-        <Suspense fallback={<Loader setIsLoaded={setIsLoaded}/>}>
-          <color attach="background" args={["#000"]} /> 
-          <Model />
-          <VideoScene />
-          {/* <Html occlude="blending" transform position={[0, 3, 5]} rotation-y={-Math.PI} className='w-[300px] h-[169px]'>
-            <video width='310' height='174' autoplay>
-              <source src='video.mp4' />
-            </video>
-          </Html> */}
-        </Suspense> 
-      </Canvas>
-    </>
+    <Canvas shadows camera={{ position: [1.6, 1.9, 2.2] }}>
+      <OrbitControls ref={orbitRef} target={[.1, 1.14, 1]} enabled={orbitEnabled} />
+      <CameraControls materials={materials} />
+      <color attach="background" args={["#FFDFD3"]} />
+      <pointLight position={[0,5,4]} castShadow intensity={.5}/>
+      <ambientLight intensity={.6} />
+      <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2   , 0, 0]} receiveShadow>
+        <planeGeometry args={[10, 10, 10]} />
+        <shadowMaterial color='#FFDFD3' />
+      </mesh>
+      <EffectComposer>
+        <Bloom luminanceThreshold={.78} luminanceSmoothing={0.1} height={300} />
+        <Noise opacity={0.20} />
+      </EffectComposer>
+    </Canvas>
   )
 }
 
-export default App;
+export default App
