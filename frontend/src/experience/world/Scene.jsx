@@ -32,7 +32,7 @@ export function Scene() {
       <mesh castShadow geometry={nodes.WoodBase.geometry} material={materials.woodMaterial} />
       <mesh castShadow geometry={nodes.Pegs02.geometry} material={materials.redMaterial} />
       <mesh castShadow geometry={nodes.Wires03.geometry} material={nodes.Wires03.material} />
-      <mesh castShadow geometry={nodes.Tablet.geometry} material={materials.blackKeyMaterial} />
+      <mesh castShadow geometry={nodes.Tablet.geometry} material={materials.blackKeyMaterial} onClick={() => console.log('hey there')} />
       <mesh geometry={nodes.Logo.geometry} material={materials['Material.001']} position={[-0.05, 0.93, 1]} rotation={[Math.PI / 2, 0, 0]} scale={0.04} />
     </>
 

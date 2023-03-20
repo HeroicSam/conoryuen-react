@@ -1,26 +1,19 @@
 import { Suspense } from 'react'
+import Loader from '../components/Loader'
 
-import { Scene } from './world/Scene'
-import { Ground }  from './world/Ground'
-import Tablet from './world/Tablet'
-import Camera from './Camera'
+import CameraControls from './CameraControls'
 import Lights from './Lights'
 import PostProcessing from './PostProcessing'
 
 function Experience() {
 
   return (
-    <>
-      <Camera />
+    <Suspense fallback={<Loader />}>
       <color attach="background" args={["#FFDFD3"]} />
+      <CameraControls />
       <Lights />
-      <Suspense>
-        <Ground />
-        <Scene />
-        <Tablet />
-      </Suspense>
       <PostProcessing />
-    </>
+    </Suspense>
   )
 }
 
