@@ -41,7 +41,7 @@ export function Scene({ materials, toTablet }) {
             occlude
             transform
           >
-          <iframe src="./src/tablet/tablet.html" />
+          <iframe src="./src/experience/tablet/tablet.html" />
         </Html>
       </mesh>
       <mesh geometry={nodes.Logo.geometry} material={materials['Material.001']} position={[-0.05, 0.93, 1]} rotation={[Math.PI / 2, 0, 0]} scale={0.04} />

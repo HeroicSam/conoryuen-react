@@ -1,31 +1,17 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo, useRef, Suspense } from 'react'
 import * as THREE from 'three'
 import gsap from 'gsap'
 import { useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import { EffectComposer, Noise, Bloom, Vignette, DepthOfField, Outline } from '@react-three/postprocessing'
+import { EffectComposer, Noise, Bloom } from '@react-three/postprocessing'
 
-import { Scene } from './components/Scene'
+import { Scene } from './world/Scene'
+import { Ground } from './world/Ground'
 
 function Experience() {
 
-  const { gl, viewport } = useThree()
-
-  if (gl && viewport) {
-    console.log(gl, viewport)
-  }
-
   const [orbitEnabled, setOrbitEnabled] = useState(true)
   const orbitRef = useRef(null)
-
-  const sizes = {
-    initialWidth: 0.127 / 1.777777777777,
-    initialHeight: 1.228 / 1080,
-  }
-
-  function resize(){
-
-  }
 
   function CameraControls(props){
     const camera = useThree((state) => state.camera)
@@ -51,7 +37,7 @@ function Experience() {
 
       return (
         <>
-          <Scene castshadow materials={materials} toTablet={toTablet} />
+          
         </>
       )
   } 
@@ -84,14 +70,13 @@ function Experience() {
   return (
     <>
       <OrbitControls ref={orbitRef} target={[.1, 1.14, 1]} enabled={orbitEnabled} />
-      <CameraControls materials={materials} />
       <color attach="background" args={["#FFDFD3"]} />
       <pointLight position={[0,5,4]} castShadow intensity={.5}/>
       <ambientLight intensity={.6} />
-      <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2   , 0, 0]} receiveShadow>
-        <planeGeometry args={[10, 10, 10]} />
-        <shadowMaterial color='#FFDFD3' />
-      </mesh>
+      <Suspense>
+        <Ground />
+        <Scene castshadow materials={materials} />
+      </Suspense>
       <EffectComposer>
         <Bloom luminanceThreshold={.78} luminanceSmoothing={0.1} height={300} />
         <Noise opacity={0.20} />

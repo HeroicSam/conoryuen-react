@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import Experience from './Experience'
+import Experience from './experience/Experience' 
 
 function App() {
   return (

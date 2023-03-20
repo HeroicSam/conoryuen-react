@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-
 function TabletApp() {
 
   return (
