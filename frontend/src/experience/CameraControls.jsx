@@ -1,18 +1,14 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import gsap from 'gsap'
 import { useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import * as THREE from 'three'
-
 import { Scene } from './world/Scene'
 import { Ground }  from './world/Ground'
 import Tablet from './world/Tablet'
 
-function Camera({ children }) {
+function Camera() {
 
   const { camera } = useThree();
-
-  const [cameraToggle, setCameraToggle] = useState(true);
   const cameraRef = useRef(null)
 
   function toTablet(){
@@ -41,6 +37,7 @@ function Camera({ children }) {
       <OrbitControls
         ref={cameraRef}
         target={[0.076, 1.192, .835]}
+        enablePan={false}
       />
       <Ground />
       <Scene />

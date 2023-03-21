@@ -3,7 +3,7 @@ import Experience from './experience/Experience'
 
 function App() {
   return (
-    <Canvas shadows camera={{ position: [1.6, 1.9, 2.2] }} >
+    <Canvas shadows camera={{ position: [1.6, 1.9, 2.2] }} dpr={[1, 3]} >
       <Experience />
     </Canvas>
   )
