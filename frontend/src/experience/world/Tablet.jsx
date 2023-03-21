@@ -1,16 +1,14 @@
-import { useState, useRef } from 'react'
-import { useThree } from '@react-three/fiber';
-import { Html } from "@react-three/drei";
+import { useState, useRef, useEffect } from 'react'
+import { useThree } from '@react-three/fiber'
+import { Html } from "@react-three/drei"
 import useWidthBreakpointReached from '../../utility/useWidthBreakpointReached'
-
-import Time from './utils/Time';
+import Time from './utils/Time'
+import Bar from './Bar'
 
 function Tablet({ toTablet }) {
 
   const isMobile = useWidthBreakpointReached('md');
-  console.log(isMobile)
 
-  const { camera } = useThree();
   const tabletRef = useRef(null);
   const [tabletToggle, setTabletToggle] = useState(false);
 
@@ -28,6 +26,10 @@ function Tablet({ toTablet }) {
         <div className={`${'w-[1200px] h-[1600px]'}`} onPointerDown={() => toTablet()}>
           <div className='absolute w-full h-full flex flex-col items-center text-white text-9xl  '>
             <Time />
+            <div className="h-full">
+              <h1>placeholder</h1>
+            </div>
+            <Bar />
           </div>
           <img className="w-full h-full object-cover" src='/pape2.jpg' />
         </div>

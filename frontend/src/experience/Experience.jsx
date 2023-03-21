@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { useState, Suspense } from 'react'
 import Loader from '../components/Loader'
 
 import CameraControls from './CameraControls'
@@ -7,8 +7,12 @@ import PostProcessing from './PostProcessing'
 
 function Experience() {
 
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  console.log(isLoaded)
+
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader setIsLoaded={setIsLoaded} />}>
       <color attach="background" args={["#FFDFD3"]} />
       <CameraControls />
       <Lights />

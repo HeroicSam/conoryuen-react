@@ -6,7 +6,7 @@ import { Scene } from './world/Scene'
 import { Ground }  from './world/Ground'
 import Tablet from './world/Tablet'
 
-function Camera() {
+function Camera({ isLoaded }) {
 
   const { camera } = useThree();
   const cameraRef = useRef(null)
@@ -29,7 +29,6 @@ function Camera() {
         }
       }
     )
-
   }
 
   return (
