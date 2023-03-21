@@ -14,7 +14,7 @@ function Camera({ isLoaded }) {
   function toTablet(){
 
     cameraRef.current.enableRotate = false
-    cameraRef.current.enableZoom = false
+    cameraRef.current.enableZoom = true
 
     gsap.to(
       camera.position,

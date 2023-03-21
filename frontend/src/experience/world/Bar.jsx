@@ -8,7 +8,7 @@ export default function Bar() {
     const t1 = gsap.timeline()
 
     t1.to('.bar', {
-      y: '20px  ',
+      y: '16px  ',
       duration: 2,
       ease: 'power3.inOut',
       yoyo: true,
@@ -19,7 +19,8 @@ export default function Bar() {
 
   return (
     <>
-      <div className='bar w-36 h-2 bg-white rounded mb-10' />
+      <p className='bar text-sm mb-2'>Click to unlock</p>
+      <div className='bar w-36 h-2 bg-white rounded mb-6' />
     </>
   )
 }
