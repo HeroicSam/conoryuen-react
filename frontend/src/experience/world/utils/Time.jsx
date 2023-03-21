@@ -20,7 +20,9 @@ function Time() {
     let day = today.getDay();
     let hour = today.getHours();
 
-    if(hour<10)hour = "0"+hour;
+    if(hour > 12){
+      hour = hour - 12
+    }
 
     var minute = today.getMinutes();
     if(minute<10)minute = "0"+minute;
@@ -28,7 +30,7 @@ function Time() {
     var second = today.getSeconds();
     if(second<10)second = "0"+second;
 
-    setCurrentTime(`${hour - 12}:${minute}`)
+    setCurrentTime(`${hour}:${minute}`)
     setCurrentDate(`${daysOfTheWeek[day]}, ${month[numericalMonth - 1]} ${date}`)
   }
 
@@ -37,8 +39,8 @@ function Time() {
 
   return (
     <div className="w-full mt-20 flex flex-col items-center">
-      <p className="m-0 p-0 text-2xl">{currentDate}</p>
-      <h1 className="m-0 p-0">{currentTime}</h1>
+      <p className="m-0 p-0 text-lg">{currentDate}</p>
+      <h1 className="m-0 p-0 text-8xl">{currentTime}</h1>
     </div>
   )
   

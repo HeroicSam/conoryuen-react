@@ -20,7 +20,7 @@ export default function Bar() {
   return (
     <>
       <p className='bar text-sm mb-2'>Click to unlock</p>
-      <div className='bar w-36 h-2 bg-white rounded mb-6' />
+      <div className='bar w-32 h-1.5 bg-white rounded mb-6' />
     </>
   )
 }

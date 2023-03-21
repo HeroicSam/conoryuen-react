@@ -1,15 +1,31 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useTransition } from 'react'
 import { Html } from "@react-three/drei"
-import useWidthBreakpointReached from '../../utility/useWidthBreakpointReached'
+import gsap from 'gsap'
 import Time from './utils/Time'
 import Bar from './Bar'
 
-function Tablet({ toTablet }) {
+function Tablet({ toTablet, tabletToggle }) {
 
-  const isMobile = useWidthBreakpointReached('md');
-
+  const [lockScreenToggle, setLockScreenToggle] = useState(true);
+  const [homeScreenToggle, setHomeScreenToggle] = useState(false);
+  const [isPending, startTransition] = useTransition()
   const tabletRef = useRef(null);
-  const [tabletToggle, setTabletToggle] = useState(false);
+
+  function handleTransition() {
+    setHomeScreenToggle(true);
+    startTransition(() => {
+      toTablet()
+      gsap.to(".lockScreen", {
+        y: -1000,
+        duration: 2,
+        delay: 1,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          setLockScreenToggle(false)
+        }
+      })
+    })    
+  }
 
   return (
     <Html
@@ -19,21 +35,20 @@ function Tablet({ toTablet }) {
       scale={.01}
       occlude
       transform
-      className='w-[670px] h-[940px]'
+      className='w-[670px] h-[930px] overflow-hidden bg-home-screen rounded-xl'
     >
-      {!tabletToggle && (
-        <div className={`${'w-full h-full'}`} onPointerDown={() => toTablet()}>
-          <div className='absolute w-full h-full flex flex-col items-center text-white text-9xl  '>
+      {lockScreenToggle && (
+        <div className={`lockScreen ${'w-full h-full'} bg-white`} onPointerDown={() => handleTransition()} >
+          <div className='absolute w-full h-full flex flex-col items-center text-white text-7xl' >
             <Time />
             <div className="h-full">
-              <h1>placeholder</h1>
             </div>
             <Bar />
           </div>
-          <img className="w-full h-full object-cover rounded-lg" src='/pape4.png' />
+          <img className="w-full h-full object-cover rounded-xl" src='/pape4.png' />
         </div>
       )}
-      {tabletToggle && <iframe src="./src/experience/world/tablet/tablet.html" />}
+      {homeScreenToggle && <iframe src="./src/experience/world/tablet/tablet.html" />}
     </Html>
   )
 }

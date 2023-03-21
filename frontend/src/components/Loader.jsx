@@ -2,9 +2,8 @@ import { Html, useProgress } from '@react-three/drei';
 
 function Loader( { setIsLoaded } ) {
   const { active, progress, errors, item, loaded, total } = useProgress()
-  console.log(active, errors);
+  console.log('loader', active, progress, item);
   if ( !active ) {
-    console.log('setting loaded')
     setIsLoaded(!active);
   };
   return (

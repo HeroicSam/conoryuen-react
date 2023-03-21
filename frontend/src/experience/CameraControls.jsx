@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
 import gsap from 'gsap'
 import { useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
@@ -10,6 +10,8 @@ function Camera({ isLoaded }) {
 
   const { camera } = useThree();
   const cameraRef = useRef(null)
+
+  const [tabletToggle, setTabletToggle] = useState(false);
 
   function toTablet(){
 
@@ -24,9 +26,6 @@ function Camera({ isLoaded }) {
         z: 1,
         duration: 2,
         ease: 'power3.inOut',
-        onComplete: () => {
-
-        }
       }
     )
   }
@@ -40,7 +39,7 @@ function Camera({ isLoaded }) {
       />
       <Ground />
       <Scene />
-      <Tablet toTablet={toTablet} />
+      <Tablet toTablet={toTablet} tabletToggle={tabletToggle} />
     </>
   )
 }

@@ -9,8 +9,6 @@ function Experience() {
 
   const [isLoaded, setIsLoaded] = useState(false)
 
-  console.log(isLoaded)
-
   return (
     <Suspense fallback={<Loader setIsLoaded={setIsLoaded} />}>
       <color attach="background" args={["#FFDFD3"]} />
