@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { Html } from "@react-three/drei"
 import Time from './utils/Time'
 import Bar from './Bar'
+import TabletApp from './TabletApp'
 
 function Tablet({ handleTransition, lockScreenToggle, homeScreenToggle }) {
 
@@ -32,7 +33,9 @@ function Tablet({ handleTransition, lockScreenToggle, homeScreenToggle }) {
           <img className="w-full h-full object-cover rounded-xl" src='/pape4.png' />
         </div>
       )}
-      {homeScreenToggle && <iframe className='applet w-[670px] h-[930px]' src="https://www.google.com" />}
+      {homeScreenToggle && (
+        <TabletApp />
+      )}
     </Html>
   )
 }
