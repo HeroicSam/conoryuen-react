@@ -1,9 +1,10 @@
-import { EffectComposer, Noise, Bloom } from '@react-three/postprocessing'
+import { EffectComposer, Noise, Bloom, Outline } from '@react-three/postprocessing'
 
 function PostProcessing() {
+
   return (
     <EffectComposer>
-      <Bloom luminanceThreshold={.78} luminanceSmoothing={0.1} height={300} />
+      <Bloom luminanceThreshold={.77} luminanceSmoothing={0.1} height={300} />
       <Noise opacity={0.20} />
     </EffectComposer>
   )

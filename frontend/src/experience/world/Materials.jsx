@@ -13,12 +13,12 @@ export const materials = {
   redMaterial: new THREE.MeshToonMaterial({
     color: new THREE.Color('#f62c2f')
   }),
-  brassMaterial: new THREE.MeshStandardMaterial({
+  brassMaterial: new THREE.MeshToonMaterial({
     // color: new THREE.Color('#E1C16E'),
     color: new THREE.Color('#b9853c'),
 
   }),
-  woodMaterial: new THREE.MeshStandardMaterial({
+  woodMaterial: new THREE.MeshToonMaterial({
     color: new THREE.Color('#a45724')
   })
 }

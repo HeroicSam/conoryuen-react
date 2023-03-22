@@ -5,7 +5,7 @@ function TabletApp() {
   console.log('mounting')
 
   return (
-    <div className='bg-white h-full'>
+    <div className='bg-transparent h-full'>
       Hello
     </div>
   )
