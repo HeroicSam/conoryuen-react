@@ -7,6 +7,9 @@ function Tablet({ handleTransition, lockScreenToggle, homeScreenToggle }) {
 
   const tabletRef = useRef(null);
 
+  let ifrm = document.getElementById('applet')
+  console.log(ifrm)
+
   return (
     <Html
       ref={tabletRef}
@@ -29,7 +32,7 @@ function Tablet({ handleTransition, lockScreenToggle, homeScreenToggle }) {
           <img className="w-full h-full object-cover rounded-xl" src='/pape4.png' />
         </div>
       )}
-      {homeScreenToggle && <iframe src="./src/experience/world/tablet/tablet.html" />}
+      {homeScreenToggle && <iframe className='applet w-[670px] h-[930px]' src="https://www.google.com" />}
     </Html>
   )
 }

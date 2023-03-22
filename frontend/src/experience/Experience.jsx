@@ -4,7 +4,7 @@ import { OrbitControls } from '@react-three/drei'
 import gsap from 'gsap'
 
 import Loader from '../components/Loader'
-import useWidthBreakpointReached from '../utility/hooks'
+import useWidthBreakpointReached from '../utility/Hooks'
 
 import Ground from './world/Ground'
 import Scene from './world/Scene'
@@ -49,7 +49,7 @@ function Experience() {
           ease: 'power3.inOut',
         }
       ).to(".lockScreen", {
-        y: -1000,
+        y: -930,
         duration: .3,
         onComplete: () => {
           setLockScreenToggle(false)
