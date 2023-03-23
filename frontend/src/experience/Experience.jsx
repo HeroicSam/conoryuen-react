@@ -50,7 +50,8 @@ function Experience() {
         }
       ).to(".lockScreen", {
         y: -930,
-        duration: .3,
+        duration: 1,
+        ease: 'power4.in',
         onComplete: () => {
           setLockScreenToggle(false)
         }

@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'home-screen': "url('/pape2.jpg')"
+        'home-screen': "url('/pape2.jpg')",
+        'appOne': "url('/pape5.jpg')",
+
       }
     },
     fontFamily: {

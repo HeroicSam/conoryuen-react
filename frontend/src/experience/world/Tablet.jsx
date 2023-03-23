@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { Html } from "@react-three/drei"
 import Time from './utils/Time'
 import Bar from './Bar'
-import TabletApp from './TabletApp'
+import TabletHome from './TabletHome'
 
 function Tablet({ handleTransition, lockScreenToggle, homeScreenToggle }) {
 
@@ -34,7 +34,7 @@ function Tablet({ handleTransition, lockScreenToggle, homeScreenToggle }) {
         </div>
       )}
       {homeScreenToggle && (
-        <TabletApp />
+        <TabletHome />
       )}
     </Html>
   )
