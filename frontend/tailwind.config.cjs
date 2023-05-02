@@ -2,15 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {
-      backgroundImage: {
-        'home-screen': "url('/pape2.jpg')",
-        'appOne': "url('/pape5.jpg')",
-
-      }
-    },
+    extend: {},
     fontFamily: {
-      'serif': ['Playfair Display']
+      'migra': ['PPMigra'],
+      'mori': ['PPMori'],
+      'pangramsansrounded': ['PPPangramSansRounded']
     },
   },
   plugins: [],

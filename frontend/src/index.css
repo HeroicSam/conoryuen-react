@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'PPMigra';
+  src: url('/fonts/PPMigra-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PPMigra';
+  src: url('/fonts/PPMigra-ExtraboldItalic.ttf');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PPMori';
+  src: url('/fonts/PPMori-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PPMori';
+  src: url('/fonts/PPMori-ExtraBold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PPPangramSansRounded';
+  src: url('/fonts/PPPangramSansRounded-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
 html,
 body,
 #root {
@@ -23,3 +58,9 @@ body,
 .appShadow {
   box-shadow: rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
+
+/* fonts in use
+PP Mori - Regular, Extrabold
+PP Pangram Sans Rounded - Bold
+PP Migra Italic - Extrabold italic
+PP Migra - Regular */
