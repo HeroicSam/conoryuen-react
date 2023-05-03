@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'soft-yellow': '#FBED96',
+        'soft-green': '#ABECD6',
+      }
+    },
     fontFamily: {
       'migra': ['PPMigra'],
       'mori': ['PPMori'],
