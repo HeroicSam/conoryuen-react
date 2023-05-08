@@ -37,26 +37,17 @@
   font-style: normal;
 }
 
-html,
-body,
-#root {
+body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
-.tablet iframe {
-  width: 100%;
-  height: 100%;
-}
-
-.div {
-  background-color: white;
-}
-
-.appShadow {
-  box-shadow: rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+.loadingScreen {
+  /* background-image: linear-gradient(to bottom right, #FBED96 0%, #ABECD6 100%); */
+  filter: url(#noiseFilter);
 }
 
 /* fonts in use
