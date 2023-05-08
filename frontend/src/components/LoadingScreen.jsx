@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import gsap from 'gsap';
 
 function LoadingScreen() {
 
@@ -10,29 +11,58 @@ function LoadingScreen() {
     }
   }, 50)
 
+  useEffect(() => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    gsap.set(".blob", {
+      width: width * 1.25,
+      height: width * 1.25,
+      top: 0 - (.5 * height),
+      left: 0 - (.5 * width)
+    })
+
+    const t1 = gsap.timeline();
+
+    t1.to(".blob", {
+      left: width - (.7 * width),
+      scale: 1.3,
+      duration: 4,
+    }).to(".blob", {
+      top: height - (.8 * height),
+      scale: 0.9,
+      duration: 3.5,
+    }).to (".blob", {
+      left: 0 - (.5 * width),
+      scale: 1.1,
+      duration: 4,
+    }).to(".blob", {
+      top: 0 - (.5 * height),
+      scale: 1.0,
+      duration: 3,
+    }).repeat(-1)
+  },[])
+
 
   return (
     <>
-      <div
-        className="loadingScreen absolute w-full h-full flex justify-end items-end text-8xl font-migra"
-      >
-        <h1 className="text-black font-bold mr-8 mb-8">
+      <div className="overlay flex justify-end items-end">
+        <h1 className="font-migra text-black font-bold text-8xl mr-8 mb-8 z-30">
           { loadProgress }%
         </h1>
-        <div className="absolute w-full h-full blob-cont">
-          <div className="absolute rounded-full w-16 h-16 bg-black" />
-          <div className="absolute rounded-full bg-yellow"/>
+      </div>
+      <div
+        className="loadingScreen absolute w-full h-full flex justify-end items-end"
+      >
+        <div className="blob-cont absolute w-full h-full bg-soft-green">
+          <div className="blob absolute rounded-full bg-soft-yellow" />
         </div>
       </div>
       <svg>
-        {/* <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FBED96" />
-          <stop offset="100%" stop-color="#ABECD6" />
-        </linearGradient> */}
         <filter id='noiseFilter'>
           <feTurbulence 
             type='fractalNoise' 
-            baseFrequency='.6' 
+            baseFrequency='.76' 
             stitchTiles='stitch'/>
           <feColorMatrix in="colorNoise" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0" />
           <feComposite operator="in" in2="SourceGraphic" result="monoNoise"/>
