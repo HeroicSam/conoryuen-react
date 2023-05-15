@@ -37,7 +37,9 @@
   font-style: normal;
 }
 
-body {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -46,13 +48,13 @@ body {
 }
 
 .loadingScreen {
-  filter: url(#noiseFilter);
   opacity: 90%;
 }
 
 .blob {
   width: calc(50%);
   height: calc(50%);
+  transform-origin: 50% 50%;
   animation: yellow 10s infinite linear;
 }
 
@@ -61,17 +63,9 @@ body {
   width: 100%;
   position: absolute;
   z-index: 2;
+  filter: url(#noiseFilter);
   backdrop-filter: blur(200px);
-
 }
-
-/* @keyframes yellow {
-  0% {top: 0px; left: 0px}
-  25% {top: 0px; left: calc(100%)}
-  50% {top: calc(100%); left: calc(100%)}
-  75% {top: calc(100%); left: 0px}
-  100% {top: 0px; left: 0px}
-} */
 
 /* fonts in use
 PP Mori - Regular, Extrabold
