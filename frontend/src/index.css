@@ -47,28 +47,28 @@ body,
   overflow: hidden;
 }
 
-.loadingScreen {
-  opacity: 90%;
-}
-
-.blob {
-  width: calc(50%);
-  height: calc(50%);
-  transform-origin: 50% 50%;
-  animation: yellow 10s infinite linear;
-}
-
 .overlay {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 2;
   filter: url(#noiseFilter);
   backdrop-filter: blur(200px);
 }
 
-/* fonts in use
-PP Mori - Regular, Extrabold
-PP Pangram Sans Rounded - Bold
-PP Migra Italic - Extrabold italic
-PP Migra - Regular */
+.parent {
+  z-index: 200;
+  -webkit-mask-image: radial-gradient(circle at center, transparent 200px, black 400px); /* Adjust the mask shape and size */
+  mask-image: radial-gradient(circle at center, transparent 200px, black 400px); /* Adjust the mask shape and size */
+  filter: url(#noiseFilter);
+}
+
+.grandparent {
+  z-index: 150;
+}
+
+h1 {
+  font-size: 90px;
+  z-index: 1000;
+}
+
+.noiseOverlay {
+  z-index: 1000;
+  filter: url(#noiseFilter);
+}
