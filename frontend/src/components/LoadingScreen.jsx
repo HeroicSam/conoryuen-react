@@ -9,8 +9,7 @@ function LoadingScreen() {
   const blobRef = useRef(null);
   let width = window.innerWidth;
   let height = window.innerHeight;
-  let blobContainerWidth;
-  let blobContainerHeight;
+  let blobX, blobY;
 
   const t1 = gsap.timeline()
 
@@ -26,8 +25,6 @@ function LoadingScreen() {
   })
 
   function endLoadingScreen(){
-
-    // t1.pause();
 
     gsap.to(".loadingScreen", {
       width: width * 0.35,
@@ -45,24 +42,27 @@ function LoadingScreen() {
 
     })
 
-    gsap.to(".blob-cont", {
-      borderRadius: "50%",
-      duration: 2,
-    })
+    window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove);
 
   }
 
-  function animateBlob(){
+  const handleMouseMove = (e) => {
 
-    // t1.to(".blob", {
-    //   rotation: 360,
-    //   duration: 5,
-    //   ease: Power0.easeNone,
-    //   repeat: -1,
-    // })
-
+    if (loading) {
+      gsap.to(".blob", {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 2,
+      })
+    } else {
+      gsap.to(".blob", {
+        x: e.clientX * .1,
+        y: e.clientY * .1,
+        duration: 2,
+      })
+    }
   }
-
 
   setTimeout(() => {
 
@@ -71,7 +71,7 @@ function LoadingScreen() {
     } else {
       setTimeout(()=> {
         setLoading(false);
-        // endLoadingScreen();
+        endLoadingScreen();
       }, 1000)
     }
 
@@ -83,16 +83,6 @@ function LoadingScreen() {
       width: "1000px",
       height: "1000px",
     })
-
-    // animateBlob();
-
-    const handleMouseMove = (e) => {
-      gsap.to(".blob", {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 2,
-      })
-    }
 
     window.addEventListener('mousemove', handleMouseMove);
 
@@ -110,13 +100,12 @@ function LoadingScreen() {
           { loading ? `${loadProgress} %` : null }
         </h1>
       </div>
-      <div className="loadingScreen absolute w-full h-full bg-soft-green overflow-hidden">
+      <div ref={blobContainerRef} className="loadingScreen absolute w-full h-full bg-soft-green overflow-hidden">
         <div ref={blobRef} className="blob absolute rounded-full bg-soft-yellow translate-x-[-50%] translate-y-[-50%]" />
-        <div className="hole"></div>
       </div>
-      <div className="parent absolute h-full w-full bg-white flex justify-center items-center">
+      {/* <div className="parent absolute h-full w-full bg-white flex justify-center items-center">
         <h1>We are farmersddddddddddddd</h1>
-      </div>
+      </div> */}
       {/* <div className="grandparent absolute w-full h-full bg-transparent flex justify-center items-center">
       </div> */}
       <svg>
@@ -129,7 +118,7 @@ function LoadingScreen() {
           <feBlend in="SourceGraphic" in2="monoNoise" mode="screen" />
         </filter>
       </svg>
-  </>
+    </>
   )
 }
 
