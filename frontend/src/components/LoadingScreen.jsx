@@ -7,11 +7,9 @@ function LoadingScreen() {
   const [loading, setLoading] = useState(true);
   const blobContainerRef = useRef(null);
   const blobRef = useRef(null);
+  const blobDimension = window.innerWidth * 0.7;
   let width = window.innerWidth;
   let height = window.innerHeight;
-  let blobX, blobY;
-
-  const t1 = gsap.timeline()
 
   window.addEventListener('resize', () => {
 
@@ -39,29 +37,32 @@ function LoadingScreen() {
       borderRadius: "50%",
       backdropFilter: "blur(50px)",
       duration: 2,
-
     })
 
-    window.removeEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mousemove', handleMouseMove);
+    gsap.to(".blob", {
+      width: width * .35,
+      height: width * .35,
+    })
 
   }
 
   const handleMouseMove = (e) => {
 
+    const percentX = (e.clientX / window.innerWidth) * 100
+    const percentY = (e.clientY / window.innerHeight) * 100
+
     if (loading) {
-      gsap.to(".blob", {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 2,
-      })
-    } else {
-      gsap.to(".blob", {
-        x: e.clientX * .1,
-        y: e.clientY * .1,
-        duration: 2,
+      gsap.set(".blob", {
+        transform: "translate(-50%, -50%)"
       })
     }
+
+    gsap.to(".blob", {
+      left: `${percentX}%`,
+      top: `${percentY}%`,
+      duration: 2,
+    })
+
   }
 
   setTimeout(() => {
@@ -74,14 +75,15 @@ function LoadingScreen() {
         endLoadingScreen();
       }, 1000)
     }
-
   }, 50)
 
   useEffect(() => {
 
+    console.log(`here: ${blobDimension}px`)
+
     gsap.set(".blob", {
-      width: "1000px",
-      height: "1000px",
+      width: `${blobDimension}px`,
+      height: `${blobDimension}px`,
     })
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -101,13 +103,8 @@ function LoadingScreen() {
         </h1>
       </div>
       <div ref={blobContainerRef} className="loadingScreen absolute w-full h-full bg-soft-green overflow-hidden">
-        <div ref={blobRef} className="blob absolute rounded-full bg-soft-yellow translate-x-[-50%] translate-y-[-50%]" />
+        <div ref={blobRef} className="blob absolute rounded-full bg-soft-yellow" />
       </div>
-      {/* <div className="parent absolute h-full w-full bg-white flex justify-center items-center">
-        <h1>We are farmersddddddddddddd</h1>
-      </div> */}
-      {/* <div className="grandparent absolute w-full h-full bg-transparent flex justify-center items-center">
-      </div> */}
       <svg>
         <filter id='noiseFilter'>
           <feTurbulence 
@@ -123,7 +120,3 @@ function LoadingScreen() {
 }
 
 export default LoadingScreen;
-
-// need to add a svg noise filter and animate the gradient clockwise
-
-// bg-gradient-to-br from-soft-yellow to-soft-green

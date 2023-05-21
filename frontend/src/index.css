@@ -54,10 +54,6 @@ body,
 
 .parent {
   z-index: 200;
-  /* -webkit-mask-image: radial-gradient(circle at center, transparent 200px, black 400px); /* Adjust the mask shape and size */
-  /* mask-image: radial-gradient(circle at center, transparent 200px, black 400px); Adjust the mask shape and size */
-  -webkit-mask-image: url(#circle-mask); /* Apply the SVG mask */
-  mask-image: url(#circle-mask); /* Apply the SVG mask */
   filter: url(#noiseFilter);
 }
 
@@ -74,3 +70,4 @@ h1 {
   z-index: 1000;
   filter: url(#noiseFilter);
 }
+
