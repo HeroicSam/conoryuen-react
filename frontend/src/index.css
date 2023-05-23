@@ -71,12 +71,8 @@ h1 {
   filter: url(#noiseFilter);
 }
 
-ul {
-  overflow: hidden;
-  white-space: no-wrap;
-  display: inline-block;
-}
-
-li {
+li{
   list-style: none;
+  display: inline-block;
+  vertical-align: middle;
 }
