@@ -71,3 +71,12 @@ h1 {
   filter: url(#noiseFilter);
 }
 
+ul {
+  overflow: hidden;
+  white-space: no-wrap;
+  display: inline-block;
+}
+
+li {
+  list-style: none;
+}

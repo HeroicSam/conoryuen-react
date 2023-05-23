@@ -1,69 +1,81 @@
-import { useState, useEffect, useRef } from "react";
-import gsap, { Power0 } from 'gsap';
+import { useState, useEffect } from "react";
+import gsap from 'gsap';
 
 function LoadingScreen() {
 
   const [loadProgress, setLoadProgress] = useState(0);
   const [loading, setLoading] = useState(true);
-  const blobContainerRef = useRef(null);
-  const blobRef = useRef(null);
+
   const blobDimension = window.innerWidth * 0.7;
   let width = window.innerWidth;
   let height = window.innerHeight;
+  let shrinkFactor = 0.35;
 
   window.addEventListener('resize', () => {
 
     width = window.innerWidth;
     height = window.innerHeight;
 
+    calculateShrinkFactor();
+    
     if (!loading) {
       endLoadingScreen();
-    }
+    };
 
-  })
+  });
+
+  function calculateShrinkFactor() {
+
+    let viewPortWidth = window.innerWidth;
+
+    if (viewPortWidth >= 1000) {
+      shrinkFactor = 0.35;
+    } else if (800 <= viewPortWidth < 999) {
+      shrinkFactor = 0.55;
+    } else if (viewPortWidth < 800) {
+      shrinkFactor = 0.75;
+    };
+
+  };
+
+  calculateShrinkFactor();
 
   function endLoadingScreen(){
 
     gsap.to(".loadingScreen", {
-      width: width * 0.35,
-      height: width * 0.35,
+      width: width * shrinkFactor,
+      height: width * shrinkFactor,
       borderRadius: "50%",
       duration: 2,
-    })
+    });
 
     gsap.to(".overlay", {
-      width: width * 0.35,
-      height: width * 0.35,
+      width: width * shrinkFactor,
+      height: width * shrinkFactor,
       borderRadius: "50%",
       backdropFilter: "blur(50px)",
       duration: 2,
-    })
+    });
 
     gsap.to(".blob", {
-      width: width * .35,
-      height: width * .35,
-    })
+      width: width * shrinkFactor,
+      height: width * shrinkFactor,
+    });
 
-  }
+  };
 
   const handleMouseMove = (e) => {
 
-    const percentX = (e.clientX / window.innerWidth) * 100
-    const percentY = (e.clientY / window.innerHeight) * 100
-
-    if (loading) {
-      gsap.set(".blob", {
-        transform: "translate(-50%, -50%)"
-      })
-    }
+    const percentX = (e.clientX / window.innerWidth) * 100;
+    const percentY = (e.clientY / window.innerHeight) * 100;
 
     gsap.to(".blob", {
       left: `${percentX}%`,
       top: `${percentY}%`,
       duration: 2,
-    })
+    });
 
-  }
+  };
 
   setTimeout(() => {
 
@@ -73,26 +85,25 @@ function LoadingScreen() {
       setTimeout(()=> {
         setLoading(false);
         endLoadingScreen();
-      }, 1000)
-    }
-  }, 50)
+      }, 1000);
+    };
+
+  }, 50);
 
   useEffect(() => {
-
-    console.log(`here: ${blobDimension}px`)
 
     gsap.set(".blob", {
       width: `${blobDimension}px`,
       height: `${blobDimension}px`,
-    })
+    });
 
     window.addEventListener('mousemove', handleMouseMove);
 
     () => {
       window.removeEventListener('mousemove', handleMouseMove);
-    }
+    };
 
-  },[])
+  },[]);
 
 
   return (
@@ -102,8 +113,8 @@ function LoadingScreen() {
           { loading ? `${loadProgress} %` : null }
         </h1>
       </div>
-      <div ref={blobContainerRef} className="loadingScreen absolute w-full h-full bg-soft-green overflow-hidden">
-        <div ref={blobRef} className="blob absolute rounded-full bg-soft-yellow" />
+      <div className="loadingScreen absolute w-full h-full bg-soft-green overflow-hidden z-10">
+        <div className="blob absolute rounded-full bg-soft-yellow translate-x-[-50%] translate-y-[-50%]" />
       </div>
       <svg>
         <filter id='noiseFilter'>
@@ -117,6 +128,6 @@ function LoadingScreen() {
       </svg>
     </>
   )
-}
+};
 
 export default LoadingScreen;

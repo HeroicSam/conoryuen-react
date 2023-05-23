@@ -1,9 +1,20 @@
-import LoadingScreen from "./components/LoadingScreen"
+import gsap from "gsap";
+
+import LoadingScreen from "./components/LoadingScreen";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+
+import registerEffects from "./utility/RegisterEffects";
 
 function App() {
+
+  registerEffects();
+  
   return (
     <div className="flex justify-center items-center font-mori h-full w-full">
-      <LoadingScreen />
+      <NavBar />
+      {/* <LoadingScreen /> */}
+      <Home />
     </div>
   )
 }
