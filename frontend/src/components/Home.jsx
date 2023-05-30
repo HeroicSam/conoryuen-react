@@ -7,7 +7,7 @@ function Home() {
   const tickerItemOneRef = useRef();
   const tickerItemTwoRef = useRef();
   let t1 = gsap.timeline();
-  let t2 = gsap.timeline()
+  let t2 = gsap.timeline();
 
   useLayoutEffect(() => {
 
@@ -21,7 +21,9 @@ function Home() {
 
       itemWidth = tickerItemOneRef.current.offsetWidth;
 
-      console.log(itemWidth)
+        // gsap.set(".ticker-wrapper", {
+        //   y: 400,
+        // })
 
       t1.fromTo(tickerItemOneRef.current, {
         x: wrapperWidth,
@@ -41,6 +43,14 @@ function Home() {
         delay: ((itemWidth - wrapperWidth) * speed )/ (wrapperWidth + itemWidth)
       }).repeat(-1).delay((itemWidth * speed )/ (wrapperWidth + itemWidth))
 
+      // setTimeout(() => {
+      //   gsap.to(".ticker-wrapper", {
+      //     y: 0,
+      //     ease: "Power4.easeOut",
+      //     delay: 0.1,
+      //     duration: 1.8
+      //   })
+      // }, 2000)
 
     }, 500)
 
@@ -75,7 +85,7 @@ function Home() {
   return(
     
     <div className="absolute w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-hidden">
-      <ul className="ticker absolute text-[15rem] w-full whitespace-nowrap inline-block ">
+      <ul className="ticker text-[15rem] w-full h-40 whitespace-nowrap inline-block mt-24 overflow-hidden">
         <div onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} ref={tickerWrapperRef} className="ticker-wrapper w-full"> 
           <li ref={tickerItemOneRef} className="ticker-item absolute leading-none">Welcome to my Folio</li>
           <li ref={tickerItemTwoRef} className="ticker-item absolute leading-none">Welcome to my Folio</li>
@@ -87,7 +97,4 @@ function Home() {
 
 export default Home;
 
-// just as the end of Folio enters the screen, the animation needs to replay, reusing the text and makes the loop seamless
-// need to tie animation to element dimensions
-
-// onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut}
+// 

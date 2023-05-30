@@ -11,7 +11,7 @@ function App() {
       <NavBar />
       {/* <LoadingScreen /> */}
       <Home />
-    </div>
+      </div>
   )
 }
 
