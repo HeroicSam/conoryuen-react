@@ -1,46 +1,16 @@
 import { useState, useEffect } from "react";
 import gsap from 'gsap';
 
-function LoadingScreen() {
+function LoadingScreen({ textTransition, sizes }) {
 
   const [loadProgress, setLoadProgress] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const blobDimension = window.innerWidth * 0.7;
-  let width = window.innerWidth;
-  let height = window.innerHeight;
-  let shrinkFactor = 0.35;
+  const { width, shrinkFactor } = sizes;
 
-  window.addEventListener('resize', () => {
+  const blobDimension = width * 0.7;
 
-    width = window.innerWidth;
-    height = window.innerHeight;
-
-    calculateShrinkFactor();
-    
-    if (!loading) {
-      endLoadingScreen();
-    };
-
-  });
-
-  function calculateShrinkFactor() {
-
-    let viewPortWidth = window.innerWidth;
-
-    if (viewPortWidth >= 1000) {
-      shrinkFactor = 0.35;
-    } else if (800 <= viewPortWidth < 999) {
-      shrinkFactor = 0.55;
-    } else if (viewPortWidth < 800) {
-      shrinkFactor = 0.75;
-    };
-
-  };
-
-  calculateShrinkFactor();
-
-  function endLoadingScreen(){
+  function transitionLoadingScreen(){
 
     gsap.to(".loadingScreen", {
       width: width * shrinkFactor,
@@ -77,18 +47,29 @@ function LoadingScreen() {
 
   };
 
-  setTimeout(() => {
+  useEffect(() => {
 
-    if (loadProgress < 100) {
-      setLoadProgress(loadProgress + 1);
-    } else {
-      setTimeout(()=> {
-        setLoading(false);
-        endLoadingScreen();
-      }, 1000);
+    if (!loading) {
+      transitionLoadingScreen();
     };
 
-  }, 50);
+  }, [ width ])
+
+  useEffect(() => {
+
+    setTimeout(() => {
+      if (loadProgress < 100) {
+        setLoadProgress(loadProgress + 1);
+      } else {
+        setTimeout(()=> {
+          setLoading(false);
+          transitionLoadingScreen();
+          textTransition();
+        }, 1000);
+      };
+    }, 50);
+
+  }, [ loadProgress ]);
 
   useEffect(() => {
 

@@ -1,11 +1,15 @@
-import { useLayoutEffect, useRef } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+
+import useViewportDimensions from "./utility/Hooks";
 
 import LoadingScreen from "./components/LoadingScreen";
 import NavBar from "./components/NavBar";
 // import Home from "./components/Home";
 
 function App() {
+
+  const sizes = useViewportDimensions();
 
   const tickerWrapperRef = useRef();
   const tickerItemOneRef = useRef();
@@ -25,9 +29,9 @@ function App() {
 
       itemWidth = tickerItemOneRef.current.offsetWidth;
 
-        gsap.set(".ticker-wrapper", {
-          y: 400,
-        })
+      gsap.set(".ticker-wrapper", {
+        y: 400,
+      })
 
       t1.fromTo(tickerItemOneRef.current, {
         x: wrapperWidth,
@@ -47,18 +51,18 @@ function App() {
         delay: ((itemWidth - wrapperWidth) * speed )/ (wrapperWidth + itemWidth)
       }).repeat(-1).delay((itemWidth * speed )/ (wrapperWidth + itemWidth))
 
-      setTimeout(() => {
-        gsap.to(".ticker-wrapper", {
-          y: 0,
-          ease: "Power4.easeOut",
-          delay: 0.1,
-          duration: 1.8
-        })
-      }, 2000)
-
     }, 500)
 
   }, [])
+
+  function textTransition() {
+    gsap.to(".ticker-wrapper", {
+      y: 0,
+      ease: "Power4.easeOut",
+      delay: 0.1,
+      duration: 1.8
+    })
+  }
 
   function handleMouseEnter() {
     gsap.to(t1, {
@@ -87,7 +91,10 @@ function App() {
   return (
     <div className="flex justify-center items-center font-mori h-full w-full">
       <NavBar />
-      {/* <LoadingScreen /> */}
+      <LoadingScreen
+        sizes={sizes}
+        textTransition={textTransition}
+      />
       <div className="absolute w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-hidden">
         <ul className="ticker text-[15rem] w-full h-60 whitespace-nowrap inline-block mt-24 overflow-hidden">
           <div onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} ref={tickerWrapperRef} className="ticker-wrapper w-full"> 
@@ -101,3 +108,6 @@ function App() {
 }
 
 export default App
+
+
+// before adding the rest of the home text tickers, I need to iron out the responsiveness on the first one to save time.
