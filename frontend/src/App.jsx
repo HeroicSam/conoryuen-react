@@ -5,9 +5,10 @@ import useViewportDimensions from "./utility/Hooks";
 
 import LoadingScreen from "./components/LoadingScreen";
 import NavBar from "./components/NavBar";
-// import Home from "./components/Home";
 
 function App() {
+
+  const [loading, setLoading] = useState(true);
 
   const sizes = useViewportDimensions();
 
@@ -20,12 +21,10 @@ function App() {
   useLayoutEffect(() => {
 
     let wrapperWidth = tickerWrapperRef.current.getBoundingClientRect().width;
-
     let itemWidth;
+    let speed = 5;
 
-    let speed = 3;
-
-    setTimeout(() => {
+    loading && setTimeout(() => {
 
       itemWidth = tickerItemOneRef.current.offsetWidth;
 
@@ -48,8 +47,8 @@ function App() {
         x: -itemWidth,
         duration: speed,
         ease: "none",
-        delay: ((itemWidth - wrapperWidth) * speed )/ (wrapperWidth + itemWidth)
-      }).repeat(-1).delay((itemWidth * speed )/ (wrapperWidth + itemWidth))
+        delay: ((itemWidth - wrapperWidth) * speed ) / (wrapperWidth + itemWidth)
+      }).repeat(-1).delay((itemWidth * speed ) / (wrapperWidth + itemWidth))
 
     }, 500)
 
@@ -92,14 +91,16 @@ function App() {
     <div className="flex justify-center items-center font-mori h-full w-full">
       <NavBar />
       <LoadingScreen
+        loading={loading}
+        setLoading={setLoading}
         sizes={sizes}
         textTransition={textTransition}
       />
       <div className="absolute w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-hidden">
-        <ul className="ticker text-[15rem] w-full h-60 whitespace-nowrap inline-block mt-24 overflow-hidden">
+        <ul className="ticker text-[20vh] md:text-[23vh] w-full h-60 whitespace-nowrap inline-block mt-28 overflow-hidden">
           <div onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} ref={tickerWrapperRef} className="ticker-wrapper w-full"> 
-            <li ref={tickerItemOneRef} className="ticker-item absolute leading-none">Welcome to my Folio</li>
-            <li ref={tickerItemTwoRef} className="ticker-item absolute leading-none">Welcome to my Folio</li>
+            <li ref={tickerItemOneRef} className="ticker-item absolute leading-none">Welcome to my Folio Welcome to my Folio</li>
+            <li ref={tickerItemTwoRef} className="ticker-item absolute leading-none">Welcome to my Folio Welcome to my Folio</li>
           </div>
         </ul>
       </div>
@@ -109,5 +110,5 @@ function App() {
 
 export default App
 
-
 // before adding the rest of the home text tickers, I need to iron out the responsiveness on the first one to save time.
+// handling bigger viewports, add more texts?

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import gsap from 'gsap';
 
-function LoadingScreen({ textTransition, sizes }) {
+function LoadingScreen({ textTransition, sizes, loading, setLoading }) {
 
   const [loadProgress, setLoadProgress] = useState(0);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const { width, shrinkFactor } = sizes;
 

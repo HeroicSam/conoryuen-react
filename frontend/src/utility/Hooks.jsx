@@ -4,8 +4,12 @@ function calculateShrinkFactor(viewPortWidth) {
 
   let shrinkFactor;
 
-  if (viewPortWidth >= 1000) {
+  if (viewPortWidth >= 1900) {
+    shrinkFactor = 0.25;
+  } else if (viewPortWidth >= 1400) {
     shrinkFactor = 0.35;
+  } else if (viewPortWidth >= 1000) {
+    shrinkFactor = 0.45;
   } else if (viewPortWidth >= 800) {
     shrinkFactor = 0.55;
   } else {
@@ -15,7 +19,6 @@ function calculateShrinkFactor(viewPortWidth) {
   return shrinkFactor;
 
 };
-
 
 export default function useViewportDimensions() {
 
