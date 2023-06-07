@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import gsap from "gsap";
 
 import useViewportDimensions from "./utility/Hooks";
@@ -6,103 +6,91 @@ import useViewportDimensions from "./utility/Hooks";
 import LoadingScreen from "./components/LoadingScreen";
 import NavBar from "./components/NavBar";
 
+const marqueeTexts = ["Welcome to my Folio"];
+
 function App() {
 
   const [loading, setLoading] = useState(true);
 
-  const sizes = useViewportDimensions();
 
-  const tickerWrapperRef = useRef();
-  const tickerItemOneRef = useRef();
-  const tickerItemTwoRef = useRef();
-  let t1 = gsap.timeline();
-  let t2 = gsap.timeline();
 
-  useLayoutEffect(() => {
+  const marqueeElements = useRef([]);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const marqueeTween = useRef();
 
-    let wrapperWidth = tickerWrapperRef.current.getBoundingClientRect().width;
-    let itemWidth;
-    let speed = 5;
+  const marqueeInitialSet = () => {
+    gsap.set(marqueeElements.current, {
+      xPercent: -100,
+      x: function(index) {
+        return (screenWidth / 2) * index;
+      }
+    })
+  }
 
-    loading && setTimeout(() => {
+  const resizeHandler = () => {
+    gsap.set(marqueeElements.current, { clearProps: "all" });
+    setScreenWidth(window.innerWidth);
+  }
 
-      itemWidth = tickerItemOneRef.current.offsetWidth;
+  const marqueeElementsRefHandler = (e, i) => {
+    marqueeElements.current[i] = e;
+  }
 
-      gsap.set(".ticker-wrapper", {
-        y: 400,
-      })
-
-      t1.fromTo(tickerItemOneRef.current, {
-        x: wrapperWidth,
-      }, {
-        x: -itemWidth,
-        duration: speed,
-        ease: "none",
-        delay: ((itemWidth - wrapperWidth) * speed) / (wrapperWidth + itemWidth)
-      }).repeat(-1)
-
-      t2.fromTo(tickerItemTwoRef.current, {
-        x: wrapperWidth,
-      }, {
-        x: -itemWidth,
-        duration: speed,
-        ease: "none",
-        delay: ((itemWidth - wrapperWidth) * speed ) / (wrapperWidth + itemWidth)
-      }).repeat(-1).delay((itemWidth * speed ) / (wrapperWidth + itemWidth))
-
-    }, 500)
-
+  useEffect(() => {
+    resizeHandler();
+    window.addEventListener("resize", resizeHandler);
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+      marqueeTween.current.pause().kill();
+    }
   }, [])
 
-  function textTransition() {
-    gsap.to(".ticker-wrapper", {
-      y: 0,
-      ease: "Power4.easeOut",
-      delay: 0.1,
-      duration: 1.8
+  useEffect(() => {
+    marqueeInitialSet();
+    marqueeTween.current && marqueeTween.current.pause().kill();
+    marqueeTween.current = gsap.to(marqueeElements.current, {
+      x: `+=${screenWidth * 1.5}`,
+      ease: "none",
+      repeat: -1,
+      duration: 10,
+      rotation: 0.1,
+      modifiers: {
+        x: (x) => {
+          return (parseFloat(x) % (screenWidth * 1.5)) + "px";
+        }
+      }
     })
-  }
+  }, [screenWidth])
 
-  function handleMouseEnter() {
-    gsap.to(t1, {
-      timeScale: 0,
-      overWrite: true
-    })
-
-    gsap.to(t2, {
-      timeScale: 0,
-      overWrite: true
-    })
-  }
-
-  function handleMouseOut() {
-    gsap.to(t1, {
-      timeScale: 1,
-      overWrite: true
-    })
-
-    gsap.to(t2, {
-      timeScale: 1,
-      overWrite: true
-    })
-  }
+  const renderMarqueeElements = () => {
+    if (marqueeTexts.length === 1) {
+      marqueeTexts[2] = marqueeTexts[1] = marqueeTexts[0];
+    }
+    if (marqueeTexts.length === 2) {
+      marqueeTexts[2] = marqueeTexts[0];
+    }
+    return marqueeTexts.map((e, i) => (
+      <p
+        className=" text-center px-4 text-2xl font-semibold absolute pin-l w-1/2"
+        key={`marquee-${i}`}
+        ref={(el) => marqueeElementsRefHandler(el, i)}
+      >
+        {e}
+      </p>
+    ));
+  };
 
   return (
     <div className="flex justify-center items-center font-mori h-full w-full">
       <NavBar />
-      <LoadingScreen
+      {/* <LoadingScreen
         loading={loading}
         setLoading={setLoading}
         sizes={sizes}
         textTransition={textTransition}
-      />
-      <div className="absolute w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-hidden">
-        <ul className="ticker text-[20vh] md:text-[23vh] w-full h-60 whitespace-nowrap inline-block mt-28 overflow-hidden">
-          <div onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} ref={tickerWrapperRef} className="ticker-wrapper w-full"> 
-            <li ref={tickerItemOneRef} className="ticker-item absolute leading-none">Welcome to my Folio Welcome to my Folio</li>
-            <li ref={tickerItemTwoRef} className="ticker-item absolute leading-none">Welcome to my Folio Welcome to my Folio</li>
-          </div>
-        </ul>
+      /> */}
+      <div className="absolute w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-x-hidden">
+        {renderMarqueeElements()}
       </div>
     </div>
   )
