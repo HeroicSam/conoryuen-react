@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import gsap from 'gsap';
 
-function LoadingScreen({ textTransition, sizes, loading, setLoading }) {
+function LoadingScreen({ textTransition, sizes, loading, setLoading, stopAnimations }) {
 
   const [loadProgress, setLoadProgress] = useState(0);
   // const [loading, setLoading] = useState(true);
