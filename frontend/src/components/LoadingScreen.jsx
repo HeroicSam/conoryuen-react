@@ -17,6 +17,9 @@ function LoadingScreen({ textTransition, sizes, loading, setLoading, stopAnimati
       height: width * shrinkFactor,
       borderRadius: "50%",
       duration: 2,
+      onComplete: () => {
+        stopAnimations();
+      }
     });
 
     gsap.to(".overlay", {

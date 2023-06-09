@@ -6,9 +6,13 @@ import useViewportDimensions from "./utility/Hooks";
 import LoadingScreen from "./components/LoadingScreen";
 import NavBar from "./components/NavBar";
 
+let t1 = gsap.timeline();
+let t2 = gsap.timeline();
+
 function App() {
 
   const [loading, setLoading] = useState(true);
+  const [enableHoverAnimations, setEnableHoverAnimations] = useState(false);
 
   const sizes = useViewportDimensions();
 
@@ -16,68 +20,6 @@ function App() {
   const tickerItemOneRef = useRef();
   const tickerItemTwoRef = useRef();
 
-  let t1 = gsap.timeline();
-  let t2 = gsap.timeline();
-
-  function handleMouseEnter() {
-
-    gsap.to(t1, {
-      timeScale: 0,
-      overWrite: true
-    })
-
-
-    gsap.to(t2, {
-      timeScale: 0,
-      overWrite: true
-    })
-
-    console.log("mouse here")
-
-    // gsap.to(t1, {
-    //   timeScale: 1,
-    //   overWrite: true
-    // })
-
-    // gsap.to(t2, {
-    //   timeScale: 1,
-    //   overWrite: true
-    // })
-  }
-
-  function handleMouseOut() {
-    // gsap.to(t1, {
-    //   timeScale: 0,
-    //   overWrite: true
-    // })
-
-    // gsap.to(t2, {
-    //   timeScale: 0,
-    //   overWrite: true
-    // })
-
-    gsap.to(t1, {
-      timeScale: 1,
-      overWrite: true
-    })
-
-    gsap.to(t2, {
-      timeScale: 1,
-      overWrite: true
-    })
-
-  }
-
-  function stopAnimations() {
-    // gsap.to(t1, {
-    //   timeScale: 0,
-    //   overWrite: true
-    // })
-    // gsap.to(t2, {
-    //   timeScale: 0,
-    //   overWrite: true
-    // })
-  }
 
   useLayoutEffect(() => {
     let windowScreen = window.screen.availWidth;
@@ -125,7 +67,40 @@ function App() {
     })
   }
 
+  function handleMouseEnter() {
+    if (enableHoverAnimations) {
+      gsap.to(t1, {
+        timeScale: 1,
+      })
+      gsap.to(t2, {
+        timeScale: 1,
+      })
+    }
+  }
 
+  function handleMouseOut() {
+    if (enableHoverAnimations) {
+      gsap.to(t1, {
+        timeScale: 0,
+      })
+  
+      gsap.to(t2, {
+        timeScale: 0,
+      })
+    }
+  }
+  
+  function stopAnimations() {
+    gsap.to(t1, {
+      timeScale: 0,
+      overWrite: true,
+    })
+    gsap.to(t2, {
+      timeScale: 0,
+      overWrite: true,
+    })
+    setEnableHoverAnimations(true);
+  }
 
   return (
     <div className="flex justify-center items-center font-mori h-full w-full">
@@ -139,11 +114,11 @@ function App() {
       />
       <div className="absolute w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-x-hidden">
         <ul className="ticker text-[20vh] md:text-[18vh] w-full h-80 whitespace-nowrap inline-block mt-28 overflow-x-hidden leading-loose">
-          <div onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} ref={tickerWrapperRef} className="ticker-wrapper w-full"> 
+          <div ref={tickerWrapperRef} className="ticker-wrapper w-full"> 
             {/* <li ref={tickerItemOneRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio  Welcome to my Folio  Welcome to my Folio  Welcome to my Folio</li>
             <li ref={tickerItemTwoRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio  Welcome to my Folio  Welcome to my Folio  Welcome to my Folio</li> */}
-            <li ref={tickerItemOneRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio</li>
-            <li ref={tickerItemTwoRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio</li>
+            <li onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} ref={tickerItemOneRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio</li>
+            <li onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} ref={tickerItemTwoRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio</li>
           </div>
         </ul>
       </div>
