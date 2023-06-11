@@ -2,6 +2,7 @@ import { useState, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 
 import useViewportDimensions from "./utility/Hooks";
+import horizontalLoop from "./utility/HelperFunctions";
 
 import LoadingScreen from "./components/LoadingScreen";
 import NavBar from "./components/NavBar";
@@ -16,45 +17,21 @@ function App() {
 
   const sizes = useViewportDimensions();
 
-  const tickerWrapperRef = useRef();
-  const tickerItemOneRef = useRef();
-  const tickerItemTwoRef = useRef();
-
+  let tickerItems;
 
   useLayoutEffect(() => {
-    let windowScreen = window.screen.availWidth;
-
-    let wrapperWidth = tickerWrapperRef.current.getBoundingClientRect().width + windowScreen;
-    let itemWidth;
-    let speed = 10;
 
     loading && setTimeout(() => {
-
-      itemWidth = tickerItemOneRef.current.offsetWidth;
 
       gsap.set(".ticker-wrapper", {
         y: window.innerHeight / 4,
       })
 
-      t1.fromTo(tickerItemOneRef.current, {
-        x: wrapperWidth,
-      }, {
-        x: -itemWidth,
-        duration: speed,
-        ease: "none",
-        delay: ((itemWidth - wrapperWidth) * speed) / (wrapperWidth + itemWidth)
-      }).repeat(-1)
-
-      t2.fromTo(tickerItemTwoRef.current, {
-        x: wrapperWidth,
-      }, {
-        x: -itemWidth,
-        duration: speed,
-        ease: "none",
-        delay: ((itemWidth - wrapperWidth) * speed ) / (wrapperWidth + itemWidth)
-      }).repeat(-1).delay((itemWidth * speed ) / (wrapperWidth + itemWidth))
-
     }, 500)
+
+    tickerItems = gsap.utils.toArray(".tickerItem")
+    console.log(tickerItems)
+    const loop = horizontalLoop(tickerItems, {paused: false, speed: 3, repeat: -1});
 
   }, [])
 
@@ -101,7 +78,7 @@ function App() {
     })
     setEnableHoverAnimations(true);
   }
-
+  
   return (
     <div className="flex justify-center items-center font-mori h-full w-full">
       <NavBar />
@@ -113,14 +90,13 @@ function App() {
         stopAnimations={stopAnimations}
       />
       <div className="absolute w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-x-hidden">
-        <ul className="ticker text-[20vh] md:text-[18vh] w-full h-80 whitespace-nowrap inline-block mt-28 overflow-x-hidden leading-loose">
-          <div ref={tickerWrapperRef} className="ticker-wrapper w-full"> 
-            {/* <li ref={tickerItemOneRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio  Welcome to my Folio  Welcome to my Folio  Welcome to my Folio</li>
-            <li ref={tickerItemTwoRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio  Welcome to my Folio  Welcome to my Folio  Welcome to my Folio</li> */}
-            <li onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} ref={tickerItemOneRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio</li>
-            <li onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} ref={tickerItemTwoRef} className="ticker-item absolute leading-none">Welcome to my Folio  Welcome to my Folio</li>
+        <div className="ticker text-[20vh] md:text-[18vh] w-full h-80 whitespace-nowrap inline-block mt-28 overflow-x-hidden leading-loose">
+          <div className="ticker-wrapper w-full relative flex">
+            <div className="tickerItem">Welcome to my Folio</div>
+            <div className="tickerItem">Welcome to my Folio</div>
+            <div className="tickerItem">Welcome to my Folio</div>
           </div>
-        </ul>
+        </div>
       </div>
     </div>
   )
