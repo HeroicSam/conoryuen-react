@@ -52,10 +52,6 @@ body,
   box-sizing: inherit;
 }
 
-span {
-  display: inline-block;
-}
-
 .overlay {
   filter: url(#noiseFilter);
   backdrop-filter: blur(200px);
@@ -78,10 +74,4 @@ h1 {
 .noiseOverlay {
   z-index: 1000;
   filter: url(#noiseFilter);
-}
-
-li{
-  list-style: none;
-  display: inline-block;
-  vertical-align: middle;
 }
