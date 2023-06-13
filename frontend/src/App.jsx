@@ -6,6 +6,7 @@ import horizontalLoop from "./utility/HelperFunctions";
 
 import LoadingScreen from "./components/LoadingScreen";
 import NavBar from "./components/NavBar";
+import Circles from "./components/Circles";
 
 let t1 = gsap.timeline();
 let t2 = gsap.timeline();
@@ -18,21 +19,33 @@ function App() {
   const sizes = useViewportDimensions();
 
   const tickerLoops = useRef([]);
-  const tickerLoopsTwo = useRef([]);
 
-  let tickerItems, tickerItemsTwo;
+  const tickerItems = [];
 
   useLayoutEffect(() => {
 
-    tickerItems = gsap.utils.toArray(".tickerItem")
-    tickerItemsTwo = gsap.utils.toArray(".tickerItemTwo")
+    tickerItems[0] = gsap.utils.toArray(".tickerItem")
+    tickerItems[1] = gsap.utils.toArray(".tickerItemTwo")
+    tickerItems[2] = gsap.utils.toArray(".tickerItemThree")
+    tickerItems[3] = gsap.utils.toArray(".tickerItemFour")
 
-    tickerLoops.current = horizontalLoop(tickerItems, {paused: false, speed: 3, repeat: -1});
-    tickerLoopsTwo.current = horizontalLoop(tickerItemsTwo, {paused: false, speed: 3, repeat: -1, reversed: 1});
+
+    tickerLoops.current = [
+      horizontalLoop(tickerItems[0], {paused: false, speed: 2.7, repeat: -1}),
+      horizontalLoop(tickerItems[1], {paused: false, speed: 3, repeat: -1, reversed: 1}).delay(1),
+      horizontalLoop(tickerItems[2], {paused: false, speed: 2, repeat: -1}).delay(2),
+      horizontalLoop(tickerItems[3], {paused: false, speed: 3.4, repeat: -1, reversed: 1}).delay(3),
+    ];
 
     loading && gsap.set(".ticker-wrapper", {
       y: window.innerHeight / 4,
     })
+
+    return () => {
+      for (let i; i < tickerLoops.current.length; i++) {
+        tickerLoops.current[i].pause().kill();
+      };
+    };
 
   }, []);
 
@@ -70,14 +83,7 @@ function App() {
   };
   
   function stopAnimations() {
-    gsap.to(t1, {
-      timeScale: 0,
-      overWrite: true,
-    });
-    gsap.to(t2, {
-      timeScale: 0,
-      overWrite: true,
-    });
+
     setEnableHoverAnimations(true);
   };
   
@@ -91,22 +97,41 @@ function App() {
         textTransition={textTransition}
         stopAnimations={stopAnimations}
       />
+      <Circles />
+
+      {/* Start - Ticker Items */}
       <div className="absolute flex flex-col w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-x-hidden">
-        <div className="ticker text-[20vh] md:text-[18vh] w-full h-64 whitespace-nowrap inline-block mt-40 overflow-x-hidden leading-none">
+        <div className="ticker text-[20vh] md:text-[18vh] w-full h-64 whitespace-nowrap inline-block mt-40 overflow-hidden leading-none">
           <div className="ticker-wrapper w-full relative flex">
             <div className="tickerItem">Welcome to my Folio</div>
             <div className="tickerItem">Welcome to my Folio</div>
             <div className="tickerItem">Welcome to my Folio</div>
           </div>
         </div>
-        <div className="ticker text-[20vh] md:text-[18vh] w-full h-64 whitespace-nowrap inline-block overflow-x-hidden leading-none z-50">
-        <div className="ticker-wrapper w-full relative flex">
-          <div className="tickerItemTwo">Welcome to my Folio</div>
-          <div className="tickerItemTwo">Welcome to my Folio</div>
-          <div className="tickerItemTwo">Welcome to my Folio</div>
+        <div className="ticker text-[20vh] md:text-[18vh] w-full h-64 whitespace-nowrap inline-block overflow-hidden leading-none z-50">
+          <div className="ticker-wrapper w-full relative flex">
+            <div className="tickerItemTwo">Welcome to my Folio</div>
+            <div className="tickerItemTwo">Welcome to my Folio</div>
+            <div className="tickerItemTwo">Welcome to my Folio</div>
+          </div>
+        </div>
+        <div className="ticker text-[20vh] md:text-[18vh] w-full h-64 whitespace-nowrap inline-block overflow-hidden leading-none">
+          <div className="ticker-wrapper w-full relative flex">
+            <div className="tickerItemThree">Welcome to my Folio</div>
+            <div className="tickerItemThree">Welcome to my Folio</div>
+            <div className="tickerItemThree">Welcome to my Folio</div>
+          </div>
+        </div>
+        <div className="ticker text-[20vh] md:text-[18vh] w-full h-64 whitespace-nowrap inline-block overflow-hidden leading-none z-50">
+          <div className="ticker-wrapper w-full relative flex">
+            <div className="tickerItemFour">Welcome to my Folio</div>
+            <div className="tickerItemFour">Welcome to my Folio</div>
+            <div className="tickerItemFour">Welcome to my Folio</div>
+          </div>
         </div>
       </div>
-      </div>
+      {/* End - Ticker Items */}
+
     </div>
   )
 }
