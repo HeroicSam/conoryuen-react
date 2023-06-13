@@ -88,3 +88,21 @@ h1 {
 .circle-one {
   animation: spin 8s linear infinite;
 }
+
+.circle-two {
+  animation: spin 4s linear infinite;
+  animation-direction: reverse;
+}
+
+.circle-three {
+  animation: spin 10s linear infinite;
+}
+
+.circle-four {
+  animation: spin 5.5s linear infinite;
+}
+
+.circle-five {
+  animation: spin 3.5s linear infinite;
+  animation-direction: reverse;
+}
