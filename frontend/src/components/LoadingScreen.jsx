@@ -92,9 +92,9 @@ function LoadingScreen({ textTransition, sizes, loading, setLoading, stopAnimati
 
   return (
     <>
-      <div className="overlay absolute w-full h-full flex justify-end items-end overflow-hidden z-30">
-        <h1 className="loadProgress font-migra text-black font-bold text-8xl mr-8 mb-8 z-30">
-          { loading ? `${loadProgress} %` : null }
+      <div className="overlay absolute w-full h-full flex justify-center items-center overflow-hidden z-30">
+        <h1 className="font-migra text-black font-bold text-8xl z-30">
+          { loading ? `${loadProgress}%` : null }
         </h1>
       </div>
       <div className="loadingScreen absolute w-full h-full bg-soft-green overflow-hidden z-10">

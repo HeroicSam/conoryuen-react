@@ -89,7 +89,9 @@ function App() {
   
   return (
     <div className="flex justify-center items-center font-mori h-full w-full">
-      <NavBar />
+      <NavBar
+        sizes={sizes}
+      />
       <LoadingScreen
         loading={loading}
         setLoading={setLoading}

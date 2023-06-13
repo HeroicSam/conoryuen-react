@@ -6,10 +6,14 @@ function calculateShrinkFactor(viewPortWidth) {
 
   if (viewPortWidth >= 1900) {
     shrinkFactor = 0.25;
+  } else if (viewPortWidth >= 1600) {
+    shrinkFactor = 0.30;
   } else if (viewPortWidth >= 1400) {
     shrinkFactor = 0.35;
+  } else if (viewPortWidth >= 1200) {
+    shrinkFactor = 0.30;
   } else if (viewPortWidth >= 1000) {
-    shrinkFactor = 0.45;
+    shrinkFactor = 0.25;
   } else if (viewPortWidth >= 800) {
     shrinkFactor = 0.55;
   } else {
