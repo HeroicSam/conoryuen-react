@@ -6,15 +6,15 @@ function calculateShrinkFactor(viewPortWidth) {
 
   if (viewPortWidth >= 1900) {
     shrinkFactor = 0.25;
-  } else if (viewPortWidth >= 1600) {
+  } else if (viewPortWidth >= 1536) {
     shrinkFactor = 0.30;
-  } else if (viewPortWidth >= 1400) {
+  } else if (viewPortWidth >= 1280) {
     shrinkFactor = 0.35;
-  } else if (viewPortWidth >= 1200) {
+  } else if (viewPortWidth >= 1024) {
     shrinkFactor = 0.30;
-  } else if (viewPortWidth >= 1000) {
-    shrinkFactor = 0.25;
-  } else if (viewPortWidth >= 800) {
+  } else if (viewPortWidth >= 768) {
+    shrinkFactor = 0.35;
+  } else if (viewPortWidth >= 640) {
     shrinkFactor = 0.55;
   } else {
     shrinkFactor = 0.75;
