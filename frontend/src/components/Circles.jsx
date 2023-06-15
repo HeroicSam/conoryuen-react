@@ -40,7 +40,8 @@ function Circles() {
         />
       </div>
       <div className="absolute translate-x-[55%] translate-y-[75%] w-full h-full z-20
-                      2xl:translate-x-[65%] 2xl:translate-y-[85%]"
+                      xl:translate-x-[65%] xl:translate-y-[85%]
+                      2xl:translate-x-[65%] 2xl:translate-y-[75%]"
       >
         <div className="circle-five rounded-full bg-gradient-to-r from-soft-yellow to-soft-green 
                         w-[12.5rem] h-[12.5rem]" 

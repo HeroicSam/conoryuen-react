@@ -88,53 +88,64 @@ function App() {
   };
   
   return (
-    <div className="flex justify-center items-center font-mori h-full w-full">
-      <NavBar
-        sizes={sizes}
-      />
-      <LoadingScreen
-        loading={loading}
-        setLoading={setLoading}
-        sizes={sizes}
-        textTransition={textTransition}
-        stopAnimations={stopAnimations}
-      />
-      <Circles />
+    <>
+      <div className="flex flex-col justify-center items-center font-mori w-full overflow-hidden">
+        <NavBar
+          sizes={sizes}
+        />
+        <LoadingScreen
+          loading={loading}
+          setLoading={setLoading}
+          sizes={sizes}
+          textTransition={textTransition}
+          stopAnimations={stopAnimations}
+        />
+        <Circles />
 
-      {/* Start - Ticker Items */}
-      <div className="absolute flex flex-col w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-x-hidden max-h-[1080px] top-0">
-        <div className="ticker text-[10rem] 2xl:text-[12rem] 3xl:text-[13.125rem] w-full h-64 whitespace-nowrap inline-block mt-40 overflow-hidden leading-none z-50">
-          <div className="ticker-wrapper w-full relative flex">
-            <div className="tickerItem">Welcome to my Folio</div>
-            <div className="tickerItem">Welcome to my Folio</div>
-            <div className="tickerItem">Welcome to my Folio</div>
+        {/* Start - Ticker Items */}
+        <div className="absolute flex flex-col w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-hidden max-h-[1080px] top-0">
+          <div className="ticker text-[10rem] 2xl:text-[12rem] 3xl:text-[13.125rem] w-full h-64 whitespace-nowrap inline-block mt-40 overflow-hidden leading-none z-50">
+            <div className="ticker-wrapper w-full relative flex">
+              <div className="tickerItem">Welcome to my Folio</div>
+              <div className="tickerItem">Welcome to my Folio</div>
+              <div className="tickerItem">Welcome to my Folio</div>
+            </div>
+          </div>
+          <div className="ticker text-[10rem] 2xl:text-[12rem] 3xl:text-[13.125rem] w-full h-64 whitespace-nowrap inline-block overflow-hidden leading-none">
+            <div className="ticker-wrapper w-full relative flex">
+              <div className="tickerItemTwo">Welcome to my Folio</div>
+              <div className="tickerItemTwo">Welcome to my Folio</div>
+              <div className="tickerItemTwo">Welcome to my Folio</div>
+            </div>
+          </div>
+          <div className="ticker text-[10rem] 2xl:text-[12rem] 3xl:text-[13.125rem] w-full h-64 whitespace-nowrap inline-block overflow-hidden leading-none z-50">
+            <div className="ticker-wrapper w-full relative flex">
+              <div className="tickerItemThree">Welcome to my Folio</div>
+              <div className="tickerItemThree">Welcome to my Folio</div>
+              <div className="tickerItemThree">Welcome to my Folio</div>
+            </div>
+          </div>
+          <div className="ticker text-[10rem] 2xl:text-[12rem] 3xl:text-[13.125rem] w-full h-64 whitespace-nowrap inline-block overflow-hidden leading-none">
+            <div className="ticker-wrapper w-full relative flex">
+              <div className="tickerItemFour">Welcome to my Folio</div>
+              <div className="tickerItemFour">Welcome to my Folio</div>
+              <div className="tickerItemFour">Welcome to my Folio</div>
+            </div>
           </div>
         </div>
-        <div className="ticker text-[10rem] 2xl:text-[12rem] 3xl:text-[13.125rem] w-full h-64 whitespace-nowrap inline-block overflow-hidden leading-none">
-          <div className="ticker-wrapper w-full relative flex">
-            <div className="tickerItemTwo">Welcome to my Folio</div>
-            <div className="tickerItemTwo">Welcome to my Folio</div>
-            <div className="tickerItemTwo">Welcome to my Folio</div>
-          </div>
-        </div>
-        <div className="ticker text-[10rem] 2xl:text-[12rem] 3xl:text-[13.125rem] w-full h-64 whitespace-nowrap inline-block overflow-hidden leading-none z-50">
-          <div className="ticker-wrapper w-full relative flex">
-            <div className="tickerItemThree">Welcome to my Folio</div>
-            <div className="tickerItemThree">Welcome to my Folio</div>
-            <div className="tickerItemThree">Welcome to my Folio</div>
-          </div>
-        </div>
-        <div className="ticker text-[10rem] 2xl:text-[12rem] 3xl:text-[13.125rem] w-full h-64 whitespace-nowrap inline-block overflow-hidden leading-none">
-          <div className="ticker-wrapper w-full relative flex">
-            <div className="tickerItemFour">Welcome to my Folio</div>
-            <div className="tickerItemFour">Welcome to my Folio</div>
-            <div className="tickerItemFour">Welcome to my Folio</div>
-          </div>
+        {/* End - Ticker Items */}
+        <div className="w-full h-[100vh] max-h-[1080px]"/>
+        <div className="w-full h-full">
+          Hello
         </div>
       </div>
-      {/* End - Ticker Items */}
 
-    </div>
+      {/* {!loading && (
+        <div className="flex justify-center items-center font-mori h-[100vh] w-full bg-black">
+          
+        </div>
+      )}   */}
+    </>
   )
 }
 

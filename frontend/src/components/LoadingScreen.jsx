@@ -91,13 +91,13 @@ function LoadingScreen({ textTransition, sizes, loading, setLoading, stopAnimati
 
 
   return (
-    <div className={` top-0 absolute w-full h-full flex justify-center items-center overflow-hidden z-30 ${loading ? "" : "max-h-[1080px]"}`}>
-      <div className={`overlay absolute w-full h-full flex justify-center items-center overflow-hidden z-30 ${loading ? "" : "max-h-[1080px]"}`}>
+    <div className={` top-0 fixed w-full h-full flex justify-center items-center overflow-hidden z-30 ${loading ? "" : "absolute max-h-[1080px]"}`}>
+      <div className={`overlay absolute w-full h-full flex justify-center items-center overflow-hidden z-30 ${loading ? "" : " max-h-[1080px]"}`}>
         <h1 className="font-migra text-black font-bold text-8xl z-30">
           { loading ? `${loadProgress}%` : null }
         </h1>
       </div>
-      <div className={`loadingScreen absolute w-full h-full bg-soft-green flex justify-center items-center overflow-hidden z-10 ${loading ? "" : "max-h-[1080px]"}`}>
+      <div className={`loadingScreen fixed w-full h-full bg-soft-green flex justify-center items-center overflow-hidden z-10 ${loading ? "" : "absolute max-h-[1080px]"}`}>
         <div className="blob absolute rounded-full bg-soft-yellow translate-x-[-50%] translate-y-[-50%]" />
       </div>
       <svg>
