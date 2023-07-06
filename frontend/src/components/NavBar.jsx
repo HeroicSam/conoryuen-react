@@ -2,8 +2,6 @@ function NavBar({ sizes }) {
 
   const isMobile = sizes.width < 768;
 
-  console.log(isMobile)
-
   return (
     <div className={`
       fixed flex w-full top-0 px-16 py-10 justify-between text-lg font-pangramsansrounded text-gray-800 z-20

@@ -100,7 +100,7 @@ function App() {
           textTransition={textTransition}
           stopAnimations={stopAnimations}
         />
-        <Circles />
+        <Circles loading={loading} />
 
         {/* Start - Ticker Items */}
         <div className="absolute flex flex-col w-full h-full font-migra font-bold italic whitespace-nowrap inline-block overflow-hidden max-h-[1080px] top-0">
@@ -134,10 +134,11 @@ function App() {
           </div>
         </div>
         {/* End - Ticker Items */}
+        
         {!loading && (
           <>
             <div className="w-full h-[100vh] max-h-[1080px]"/>
-            <div className="w-full h-full">
+            <div className="w-full h-96 bg-slate-400">
               Hello
             </div>
           </>
