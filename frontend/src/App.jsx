@@ -134,10 +134,14 @@ function App() {
           </div>
         </div>
         {/* End - Ticker Items */}
-        <div className="w-full h-[100vh] max-h-[1080px]"/>
-        <div className="w-full h-full">
-          Hello
-        </div>
+        {!loading && (
+          <>
+            <div className="w-full h-[100vh] max-h-[1080px]"/>
+            <div className="w-full h-full">
+              Hello
+            </div>
+          </>
+        )}
       </div>
 
       {/* {!loading && (

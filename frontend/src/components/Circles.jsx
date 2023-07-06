@@ -11,23 +11,23 @@ function Circles() {
                     2xl:w-[28rem] 2xl:h-[28rem]"
         />
       </div>
-      <div className="absolute w-full h-full
+      <div className="absolute 
                       translate-x-[60%] translate-y-[10%] 
-                      2xl:translate-x-[20%] 2xl:translate-y-[20%] ">
+                      2xl:translate-x-[40rem] 2xl:translate-y-[20%] ">
         <div className="circle-two rounded-full bg-gradient-to-r from-soft-yellow to-soft-green z-0
                         w-[6.25rem] h-[6.25rem]
                         2xl:w-[10rem] 2xl:h-[10rem]
                         "
         />
       </div>
-      <div className="absolute w-full h-full z-20
+      <div className="absolute z-20
                       translate-x-[90%] translate-y-[30%]
                       2xl:translate-x-[80%] 2xl:translate-y-[30%]">
         <div className="circle-three rounded-full bg-gradient-to-r from-soft-yellow to-soft-green
                         w-[6.25rem] h-[6.25rem]"
         />
       </div>
-      <div className="absolute w-full h-full z-20
+      <div className="absolute z-20
                       -translate-x-[40%] translate-y-[60%]
                       sm:-translate-x-[20%]
                       md:-translate-x-[10%]
@@ -39,7 +39,7 @@ function Circles() {
                         w-[15.625rem] h-[15.625rem]"
         />
       </div>
-      <div className="absolute translate-x-[55%] translate-y-[75%] w-full h-full z-20
+      <div className="absolute translate-x-[55%] translate-y-[75%] z-20
                       xl:translate-x-[65%] xl:translate-y-[85%]
                       2xl:translate-x-[65%] 2xl:translate-y-[75%]"
       >
